@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import Reclamation from '../model/reclamation';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReclamationService {
-  private apiUrl = '127.0.0.1:3000/rec/'; // Replace with your actual API endpoint
+  private apiUrl = 'http://127.0.0.1:3000/rec/'; // Replace with your actual API endpoint
 
   constructor(private http: HttpClient) { }
 
@@ -14,8 +15,8 @@ export class ReclamationService {
     return this.http.post<any>(this.apiUrl, reclamation);
   }
 
-  getAllReclamations(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getAllReclamations() {
+    return this.http.get<Reclamation[]>(this.apiUrl);
   }
 
   updateReclamation(id: string, reclamation: any): Observable<any> {
