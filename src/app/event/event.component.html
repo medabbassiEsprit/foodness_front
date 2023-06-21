@@ -1,0 +1,40 @@
+<h1>Events</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Titre</th>
+      <th scope="col">organisateur</th>
+      <th scope="col">emplacementEvent</th>
+      <th scope="col">dateDeb</th>
+      <th scope="col">dateFin</th>
+      <th scope="col">dateCreation</th>
+      <th scope="col">dateModif</th>
+      <th scope="col">nbrParticipants</th>
+      <th scope="col">idUsers</th>
+      <th scope="col">refImage</th>
+      <th scope="col">imageIds</th>
+      <th scope="col">typEvent</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let event of events">
+    <td>{{event.Titre}}</td>
+    <td>{{event.organisateur}}</td>
+    <td>{{event.emplacementEvent}}</td>
+<td>{{event.dateDeb}}</td>
+<td>{{event.dateFin}}</td>
+<td>{{event.dateCreation}}</td>
+<td>{{event.dateModif}}</td>
+<td>{{event.nbrParticipants}}</td>
+<td>{{event.idUsers}}</td>
+<td>{{event.refImage}}</td>
+<td>{{event.imageIds}}</td>
+<td>{{event.typEvent}}</td>
+  </tr>
+</tbody>
+</table>
+
+<div>
+  <button routerLink="/addEvent">Add Event</button>
+</div>
