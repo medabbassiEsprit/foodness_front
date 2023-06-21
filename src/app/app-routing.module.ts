@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponentComponent } from './layout/home/home-component/home-component.component';
 import { LoginComponentComponent } from './layout/login/login-component/login-component.component';
@@ -20,6 +21,18 @@ const routes: Routes = [
 
 ];
 
+=======
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { ViewReclamationComponent } from './view-reclamation/view-reclamation.component';
+
+
+const routes: Routes = [
+  {path:'products',component:ViewReclamationComponent},
+
+
+];
+>>>>>>> origin/origin/recBranch
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

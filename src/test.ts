@@ -1,26 +1,52 @@
-// This file is required by karma.conf.js and loads recursively all the .spec and framework files
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ReclamationService } from './app/data/reclamation.service';
 
-import 'zone.js/testing';
-import { getTestBed } from '@angular/core/testing';
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
-} from '@angular/platform-browser-dynamic/testing';
+describe('ReclamationService', () => {
+  let service: ReclamationService;
+  let httpMock: HttpTestingController;
 
-declare const require: {
-  context(path: string, deep?: boolean, filter?: RegExp): {
-    <T>(id: string): T;
-    keys(): string[];
-  };
-};
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [ReclamationService]
+    });
+    service = TestBed.inject(ReclamationService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
 
-// First, initialize the Angular testing environment.
-getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting(),
-);
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-// Then we find all the tests.
-const context = require.context('./', true, /\.spec\.ts$/);
-// And load the modules.
-context.keys().map(context);
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should get all reclamations', () => {
+    const mockReclamations = [{ id: 1, recTitle: 'Reclamation 1' }, { id: 2, recTitle: 'Reclamation 2' }];
+
+    service.getAllReclamations().subscribe((reclamations: any) => {
+      expect(reclamations).toEqual(mockReclamations);
+    });
+
+    const req = httpMock.expectOne('/api/reclamations');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockReclamations);
+  });
+
+  it('should create a reclamation', () => {
+    const mockReclamation = { userId: '1', recTitle: 'New Reclamation' };
+
+    service.createReclamation(mockReclamation).subscribe((createdReclamation: any) => {
+      expect(createdReclamation).toEqual(mockReclamation);
+    });
+
+    const req = httpMock.expectOne('/api/reclamations');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(mockReclamation);
+    req.flush(mockReclamation);
+  });
+
+  // Add more test cases for other methods...
+});
