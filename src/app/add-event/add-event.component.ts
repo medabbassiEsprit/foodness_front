@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { Event } from '../Model/event';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
@@ -10,7 +10,7 @@ import { Event } from '../Model/event';
 export class AddEventComponent implements OnInit {
   event: Event = new Event();
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +21,7 @@ export class AddEventComponent implements OnInit {
     this.eventService.addEvent(this.event, images).subscribe(
       (data) => {
         console.log(data);
-        // Handle successful event addition, e.g., navigate to a success page
-      },
+        this.router.navigateByUrl('/addEvent');      },
       (error) => {
         console.error(error);
         // Handle error, e.g., display an error message
