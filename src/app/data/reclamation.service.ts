@@ -28,11 +28,11 @@ export class ReclamationService {
   }
 
   updateReclamationStatus(id: string, status: string): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${id}/status`, { status });
+    return this.http.patch<any>(`${this.apiUrl}${id}/status`, { status });
   }
 
   updateReclamationLabel(id: string, recLabel: string): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${id}/label`, { recLabel });
+    return this.http.patch<any>(`${this.apiUrl}${id}/label`, { recLabel });
   }
 
   updateReclamationLabelWithPost(id: string, recLabel: string): Observable<any> {

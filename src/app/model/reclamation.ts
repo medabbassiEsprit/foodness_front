@@ -5,6 +5,7 @@ enum ReclamationLabel {
 }
 
 class Reclamation {
+  _id!:string;
   userId!: string;
   recTitle!: string;
   recContent!: string;
@@ -16,6 +17,7 @@ class Reclamation {
   updated_at!: Date;
 
   constructor(
+    _id:string,
     userId: string,
     recTitle: string,
     recContent: string,
@@ -26,6 +28,7 @@ class Reclamation {
     created_at: Date,
     updated_at: Date
   ) {
+    this._id=_id;
     this.userId = userId;
     this.recTitle = recTitle;
     this.recContent = recContent;
