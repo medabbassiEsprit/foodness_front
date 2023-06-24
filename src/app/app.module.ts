@@ -12,13 +12,25 @@ import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventService } from './services/event.service';
+import { EventComponent } from './event/event.component';
+import { EventAdminComponent } from './layout/event-admin/event-admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponentComponent,
+    FooterComponentComponent,
+    HomeComponentComponent,
+    LoginComponentComponent,
+    RegisterComponentComponent,
+    AdminComponentComponent,
+    EventComponent,
+    EventAdminComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [EventService],
   bootstrap: [AppComponent]

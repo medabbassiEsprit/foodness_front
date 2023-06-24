@@ -1,1 +1,71 @@
-<p>add-event works!</p>
+<style>
+  form {
+    padding: 100px;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+    display: grid;
+    gap: 10px;
+  }
+
+  label {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    margin-bottom: 5px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+</style>
+
+<form (submit)="onSubmit()">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Titre Event</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" >
+  </div>
+  <div class="mb-3">
+    <label for="validationCustom04" class="form-label">Type Event</label>
+    <select class="form-select" id="validationCustom04" required >
+      <option selected disabled value="">Types...</option>
+      <option>don</option>
+      <option>Event Type 2</option>
+      <option>Event Type 3</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Emplacement Event</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" >
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" ></textarea>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input type="date" class="form-control" id="startDate">
+    </div>
+    <div class="col-md-6">
+      <label for="endDate" class="form-label">End Date</label>
+      <input type="date" class="form-control" id="endDate" >
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="organisateur" class="form-label">Organisateur</label>
+    <input type="text" class="form-control" id="organisateur" >
+  </div>
+  <div class="mb-3">
+    <label for="nbrParticipants" class="form-label">Nbr Participants</label>
+    <input type="text" class="form-control" id="nbrParticipants" >
+  </div>
+  <div class="mb-3">
+    <label for="formFileMultiple" class="form-label">Upload Images</label>
+    <input class="form-control" type="file" id="formFileMultiple" multiple (change)="onFileSelected($event)">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" >
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
