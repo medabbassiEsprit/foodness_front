@@ -12,7 +12,9 @@ import { ViewReclamationComponent } from './view-reclamation/view-reclamation.co
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
-
+import { ReclamationPopupComponent } from './reclamation-popup/reclamation-popup.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UserSpaceComponent } from './user-space/user-space.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +24,16 @@ import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
     LoginComponentComponent,
     RegisterComponentComponent,
     AdminComponentComponent,
-    ViewReclamationComponent
+    ViewReclamationComponent,
+    UserSpaceComponent,
+    ReclamationPopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NoopAnimationsModule,
 
   ],
   providers: [],

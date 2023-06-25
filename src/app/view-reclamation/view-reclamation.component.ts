@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Reclamation from '../model/reclamation';
 import { ReclamationService } from '../data/reclamation.service';
+import { ReplyServiceService } from '../reply-service.service';
+import Reply from '../model/reply';
 
 @Component({
   selector: 'app-view-reclamation',
@@ -11,7 +13,7 @@ export class ViewReclamationComponent implements OnInit {
   reclamationList: Reclamation[] = [];
   showReplyField: boolean = false;
 
-  constructor(private reclamationConsumer: ReclamationService) {}
+  constructor(private reclamationConsumer: ReclamationService, private replyConsumer:ReplyServiceService) {}
 
   ngOnInit(): void {
     this.reclamationConsumer.getAllReclamations().subscribe({
@@ -23,6 +25,7 @@ export class ViewReclamationComponent implements OnInit {
         console.info('completed');
       }
     });
+    this.replyContentList = this.reclamationList.map(() => '');
   }
 
   updateStatus(item: Reclamation): void {
@@ -64,9 +67,20 @@ export class ViewReclamationComponent implements OnInit {
       }
     });
   }
+  replyContentList: string[] = [];
+  submitReply(item: Reclamation, index: number): void {
+    const replyContent = this.replyContentList[index];
+    const reply: Reply = new Reply('', item.userId, item._id, replyContent, new Date(), new Date());
+    this.replyConsumer.addReply(reply).subscribe({
+      next: (response) => {
+        console.log('Reply added successfully:', response);
 
-  toggleReplyField(): void {
-    this.showReplyField = !this.showReplyField;
+      },
+      error: (err) => {
+        console.error('Failed to add reply:', err);
+      }
+    });
   }
+
 
 }

@@ -1,0 +1,46 @@
+<app-header-component></app-header-component>
+
+<style>
+  h1{
+    padding-top: 50px;
+  }
+  .card {
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .card-content {
+    margin-bottom: 10px;
+  }
+
+  .card-footer {
+    font-size: 12px;
+    color: #888;
+
+  }
+  span{
+    padding: 10px;
+  }
+</style>
+
+<h1>Mes Reclamations </h1>
+
+<div class="card" *ngFor="let item of reclamationList"  (click)="openPopup(item)">
+  <div class="card-header">{{ item.recTitle }}</div>
+  <div class="card-content">{{ item.recContent }}</div>
+  <div class="card-footer">
+    <span>Label: {{ item.recLabel }}</span>
+    <span>Status: {{ item.recStatus }}</span>
+    <span>Created At: {{ item.created_at | date: 'medium' }}</span>
+  </div>
+</div>

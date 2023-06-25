@@ -13,6 +13,7 @@ class Reclamation {
   recStatus!: string;
   recEvent!: boolean;
   rectFormation!: boolean;
+  showReplyField!: boolean;
   created_at!: Date;
   updated_at!: Date;
 
@@ -24,6 +25,7 @@ class Reclamation {
     recLabel: ReclamationLabel,
     recStatus: string,
     recEvent: boolean,
+    showReplyField:boolean,
     rectFormation: boolean,
     created_at: Date,
     updated_at: Date
@@ -37,6 +39,7 @@ class Reclamation {
     this.recEvent = recEvent;
     this.rectFormation = rectFormation;
     this.created_at = created_at;
+    this.showReplyField;
     this.updated_at = updated_at;
   }
 }

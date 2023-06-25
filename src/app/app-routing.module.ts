@@ -6,6 +6,7 @@ import { RegisterComponentComponent } from './layout/register/register-component
 import { HeaderComponentComponent } from './layout/header/header-component/header-component.component';
 import { AdminComponentComponent } from './dashborad/admin/admin-component/admin-component.component';
 import { ViewReclamationComponent } from './view-reclamation/view-reclamation.component';
+import { UserSpaceComponent } from './user-space/user-space.component';
 
 
 const routes: Routes = [
@@ -13,8 +14,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponentComponent},
   {path:'login' , component:LoginComponentComponent},
   {path:'register',component:RegisterComponentComponent},
+  {path:'home/space_client', component:UserSpaceComponent},
   {path:'admin',component:AdminComponentComponent},
-  {path:'reclamation', component:ViewReclamationComponent},
+  {path:'admin/reclamation', component:ViewReclamationComponent},
+
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 

@@ -825,53 +825,61 @@
             }
           </style>
 
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Content</th>
-                  <th>Label</th>
-                  <th>Status</th>
-                  <th>Event</th>
-                  <th>Formation</th>
-                  <th>Created At</th>
-                  <th>Reply</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of reclamationList">
-                  <td>{{ item.recTitle }}</td>
-                  <td>{{ item.recContent }}</td>
-                  <td>
-                    <select class="form-select" [(ngModel)]="item.recLabel" (change)="updateLabel(item)">
-                      <option value="discuss" [selected]="item.recLabel === 'discuss'" class="label-discuss">Discuss</option>
-                      <option value="fraud" [selected]="item.recLabel === 'fraud'" class="label-fraud">Fraud</option>
-                      <option value="infos" [selected]="item.recLabel === 'infos'" class="label-infos">Infos</option>
-                    </select>
-                  </td>
-                  <td>
-                    <select class="form-select" [(ngModel)]="item.recStatus" (change)="updateStatus(item)">
-                      <option value="Pending" [selected]="item.recStatus === 'Pending'">Pending</option>
-                      <option value="Closed" [selected]="item.recStatus === 'Closed'">Closed</option>
-                      <option value="InReview" [selected]="item.recStatus === 'InReview'">In Review</option>
-                    </select>
-                  </td>
-                  <td>{{ item.recEvent }}</td>
-                  <td>{{ item.rectFormation }}</td>
-                  <td>{{ item.created_at | date: 'medium' }}</td>
-                  <td>
-                    <i class="fas fa-chevron-down expand-icon" (click)="toggleReplyField()"></i>
-                    <div class="reply-field" *ngIf="showReplyField">
-                      <!-- Your reply field HTML code goes here -->
-                      <!-- Add your custom reply field components, inputs, or textarea here -->
-                      <input type="text" name="" id="">
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Label</th>
+        <th>Status</th>
+        <th>Event</th>
+        <th>Formation</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of reclamationList; let i = index">
+        <tr>
+          <td>{{ item.recTitle }}</td>
+          <td>{{ item.recContent }}</td>
+          <td>
+            <select class="form-select" [(ngModel)]="item.recLabel" (change)="updateLabel(item)">
+              <option value="discuss" [selected]="item.recLabel === 'discuss'" class="label-discuss">Discuss</option>
+              <option value="fraud" [selected]="item.recLabel === 'fraud'" class="label-fraud">Fraud</option>
+              <option value="infos" [selected]="item.recLabel === 'infos'" class="label-infos">Infos</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-select" [(ngModel)]="item.recStatus" (change)="updateStatus(item)">
+              <option value="Pending" [selected]="item.recStatus === 'Pending'">Pending</option>
+              <option value="Closed" [selected]="item.recStatus === 'Closed'">Closed</option>
+              <option value="InReview" [selected]="item.recStatus === 'InReview'">In Review</option>
+            </select>
+          </td>
+          <td>{{ item.recEvent }}</td>
+          <td>{{ item.rectFormation }}</td>
+          <td>{{ item.created_at | date: 'medium' }}</td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <input type="text" class="form-control" name="reply{{i}}" id="reply{{i}}"   [(ngModel)]="replyContentList[i]">
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="submitReply(item,i)">Reply</button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
 
       <!--**********************************
           Content body end
