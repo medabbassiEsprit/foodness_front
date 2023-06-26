@@ -23,6 +23,7 @@ export class AddEventComponent implements OnInit {
 
   ngOnInit(): void {}
 
+
   onFileSelected(event: any) {
     this.images = event.target.files as File[]; // Store the selected images as an array
 
@@ -51,43 +52,17 @@ export class AddEventComponent implements OnInit {
     return Promise.all(imagePromises);
   }
 
-  onSubmit() {
-    if (this.images.length > 0) {
-      const imageUrlsPromise = this.uploadImages(); // This now returns a Promise<string[]>
-
-      imageUrlsPromise.then(
-        (imageUrls: string[]) => {
-          // Proceed with saving the event and associated image URLs
-          this.event.imageIds = imageUrls;
-          this.eventService.addEvent(this.event, this.images).subscribe(
-            () => {
-              console.log('Event created successfully');
-              this.router.navigate(['/events']); // Navigate to events page
-            },
-            error => {
-              console.error('Failed to create event:', error);
-              // Handle error
-            }
-          );
-        },
-        error => {
-          console.error('Failed to upload images:', error);
-          // Handle error
-        }
-      );
-    } else {
-      // No images selected
-      // Proceed with saving the event without images
-      this.eventService.addEvent(this.event, []).subscribe(
-        () => {
-          console.log('Event created successfully');
-          this.router.navigate(['/events']); // Navigate to events page
-        },
-        error => {
-          console.error('Failed to create event:', error);
-          // Handle error
-        }
-      );
-    }
+  onSubmit(): void {
+    this.eventService.addEvent(this.event,  this.imageUrls).subscribe(
+      () => {
+        console.log('Event created successfully');
+        this.router.navigate(['/events']); // Navigate to events page
+      },
+      error => {
+        console.log(this.event);
+        console.error('Failed to create event:', error);
+        // Handle error
+      }
+    );
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Event } from '../Model/event';
+import { Image } from '../Model/image';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +22,30 @@ export class EventService {
     return this.http.post<any>(url, user);
   }
 
-  addEvent(event: any, images: File[]): Observable<any> {
+  addEvent(event: any, images: string[]): Observable<any> {
     const url = this.apiUrl;
     const formData = new FormData();
-    formData.append('name', event.name);
-    // Append other event data as needed
+    event.imageIds = images;
+    formData.append('Titre', event.Titre);
+    formData.append('emplacementEvent', event.emplacementEvent);
+    formData.append('description', event.description);
+    formData.append('dateDeb', event.dateDeb);
+    formData.append('dateFin', event.dateFin);
+    formData.append('organisateur', event.organisateur);
+
+    formData.append('nbrParticipants', event.nbrParticipants.toString());
+   // formData.append('idUsers', "1s8t11tezt84e78ys1s8ty44y(");
+    //formData.append('refImage', event.refImage);
+   // formData.append('imageIds', JSON.stringify(event.imageIds));
+
     for (let i = 0; i < images.length; i++) {
-      formData.append('images', images[i]);
+      formData.append('imageIds', images[i]);
     }
+    console.log(images);
+      console.log(formData);
     return this.http.post<any>(url, formData);
   }
+
 
   getEventById(eventId: string): Observable<any> {
     const url = `${this.apiUrl}${eventId}`;

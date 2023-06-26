@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { EventService } from './services/event.service';
 import { EventComponent } from './event/event.component';
 import { EventAdminComponent } from './layout/event-admin/event-admin.component';
+import { FormsModule } from '@angular/forms';
+import { AddEventComponent } from './add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,15 @@ import { EventAdminComponent } from './layout/event-admin/event-admin.component'
     RegisterComponentComponent,
     AdminComponentComponent,
     EventComponent,
-    EventAdminComponent
+    EventAdminComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
+
   ],
   providers: [EventService],
   bootstrap: [AppComponent]
