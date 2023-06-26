@@ -20,10 +20,10 @@ export class ImageServService {
 
     return this.http.post<any>(`${this.apiUrl}/image/`, formData)
       .toPromise()
-      .then((response)=> response.imageUrls[0] ).finally(() => {
+      .then((response)=> response.imageUrls ).finally(() => {
 
         console.info('done');
-       })
+       }).catch((err) => {  console.error(err); })
      ;
   }
 

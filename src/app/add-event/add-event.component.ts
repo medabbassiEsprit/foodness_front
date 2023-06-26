@@ -29,7 +29,9 @@ export class AddEventComponent implements OnInit {
     if (this.images.length > 0) {
       this.uploadImages().then(
         (imageUrls: string[]) => {
-          this.imageUrls = imageUrls; // Store the uploaded image URLs
+          this.imageUrls = imageUrls;
+          // Store the uploaded image URLs
+          console.log( this.imageUrls);
         },
         error => {
           console.log( this.imageUrls)
