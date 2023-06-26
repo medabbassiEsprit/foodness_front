@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Plat } from '../Model/plat';
+import { Console } from 'console';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuplatService {
-  private apiUrl = 'http://localhost:3000'; // Update with your API URL
-  
+  private apiUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
-  createPlat(platData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/plats`, platData);
-  }
+createPlat(platData: any) {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
+  return this.http.post(`${this.apiUrl}/plat/`, platData, httpOptions);
+} 
+  
   getPlats() {
     return this.http.get<Plat[]>(`${this.apiUrl}/plats`);
   }
