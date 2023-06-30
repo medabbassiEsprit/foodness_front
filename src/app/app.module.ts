@@ -16,6 +16,7 @@ import { EventComponent } from './event/event.component';
 import { EventAdminComponent } from './layout/event-admin/event-admin.component';
 import { FormsModule } from '@angular/forms';
 import { AddEventComponent } from './add-event/add-event.component';
+import { ParticipationComponent } from './participation/participation.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddEventComponent } from './add-event/add-event.component';
     AdminComponentComponent,
     EventComponent,
     EventAdminComponent,
-    AddEventComponent
+    AddEventComponent,
+    ParticipationComponent
   ],
   imports: [
     BrowserModule,

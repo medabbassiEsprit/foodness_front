@@ -9,11 +9,11 @@ import { ReclamationService } from '../data/reclamation.service';
 })
 export class ViewReclamationComponent implements OnInit {
 
-  reclamationList: Reclamation []=[];
+  //reclamationList: Reclamation []=[];
   constructor(private reclamationConsumer:ReclamationService) { }
 
   ngOnInit(): void {
-      this.reclamationConsumer.getAllReclamations().subscribe({
+     /*  this.reclamationConsumer.getAllReclamations().subscribe({
         next:(data)=>this.reclamationList= data,
         error:(err) =>{
             console.error(err)
@@ -21,7 +21,7 @@ export class ViewReclamationComponent implements OnInit {
             console.info('completed')
         },
 
-      })
+      }) */
 
   }
 

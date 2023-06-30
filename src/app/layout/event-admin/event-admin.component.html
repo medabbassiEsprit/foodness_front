@@ -796,9 +796,7 @@
                 <th scope="col">dateCreation</th>
                 <th scope="col">dateModif</th>
                 <th scope="col">nbrParticipants</th>
-                <th scope="col">idUsers</th>
-                <th scope="col">refImage</th>
-                <th scope="col">imageIds</th>
+
                 <th scope="col">typEvent</th>
 
               </tr>
@@ -808,15 +806,13 @@
               <td>{{event.Titre}}</td>
               <td>{{event.organisateur}}</td>
               <td>{{event.emplacementEvent}}</td>
-          <td>{{event.dateDeb}}</td>
-          <td>{{event.dateFin}}</td>
-          <td>{{event.dateCreation}}</td>
-          <td>{{event.dateModif}}</td>
+              <td>{{event.dateDeb| date}}</td>
+          <td>{{event.dateFin| date}}</td>
+          <td>{{event.dateCreation| date}}</td>
+          <td>{{event.dateModif| date}}</td>
           <td>{{event.nbrParticipants}}</td>
-          <td>{{event.idUsers}}</td>
-          <td>{{event.refImage}}</td>
-          <td>{{event.imageIds}}</td>
           <td>{{event.typEvent}}</td>
+          <td><<button routerLink="/participation">View</button>></td>
             </tr>
           </tbody>
           </table>

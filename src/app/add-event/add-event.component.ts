@@ -56,7 +56,7 @@ export class AddEventComponent implements OnInit {
     this.eventService.addEvent(this.event,  this.imageUrls).subscribe(
       () => {
         console.log('Event created successfully');
-        this.router.navigate(['/events']); // Navigate to events page
+        this.router.navigate(['/event']); // Navigate to events page
       },
       error => {
         console.log(this.event);

@@ -36,11 +36,11 @@ export class EventService {
     formData.append('nbrParticipants', event.nbrParticipants.toString());
    // formData.append('idUsers', "1s8t11tezt84e78ys1s8ty44y(");
     //formData.append('refImage', event.refImage);
-   // formData.append('imageIds', JSON.stringify(event.imageIds));
-
+    formData.append('imageId', JSON.stringify(event.imageIds));
+/*
     for (let i = 0; i < images.length; i++) {
-      formData.append('imageIds', images[i]);
-    }
+      formData.append('imageId', images[i]);
+    } */
     console.log(images);
       console.log(formData);
     return this.http.post<any>(url, formData);
