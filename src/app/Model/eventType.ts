@@ -1,5 +1,5 @@
 export class EventType {
-  id!: string;
-  name!: string;
-  description!: string;
+  _id!: string;
+  typeName!: string;
+
 }

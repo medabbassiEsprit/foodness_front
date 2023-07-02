@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Event } from '../Model/event';
-import { Image } from '../Model/image';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import { Image } from '../Model/image';
 export class EventService {
 
   private apiUrl = 'http://127.0.0.1:3000/event/';
+
 
   constructor(private http: HttpClient) {}
 
@@ -32,12 +33,14 @@ export class EventService {
     formData.append('dateDeb', event.dateDeb);
     formData.append('dateFin', event.dateFin);
     formData.append('organisateur', event.organisateur);
-
+    formData.append('typeName', event.typeName);
     formData.append('nbrParticipants', event.nbrParticipants.toString());
    // formData.append('idUsers', "1s8t11tezt84e78ys1s8ty44y(");
     //formData.append('refImage', event.refImage);
-    formData.append('imageId', JSON.stringify(event.imageIds));
-/*
+    for (let i = 0; i < images.length; i++) {
+      formData.append('imageId', images[i]);
+    }
+    /*
     for (let i = 0; i < images.length; i++) {
       formData.append('imageId', images[i]);
     } */
@@ -49,7 +52,7 @@ export class EventService {
 
   getEventById(eventId: string): Observable<any> {
     const url = `${this.apiUrl}${eventId}`;
-    return this.http.get<any>(url);
+    return this.http.get<Event>(url);
   }
 
   updateEventById(eventId: string, updatedEvent: any): Observable<any> {

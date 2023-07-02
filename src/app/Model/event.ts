@@ -11,6 +11,9 @@ export class Event {
   nbrParticipants!: number;
   idUsers!: string[];
   refImage!: string;
-  imageIds!: string[];
-  typEvent!: string;
+  imageId!: string[];
+  name!: string;
+  typeName!: string;
+  type!: string; // Add the 'type' property
+
 }

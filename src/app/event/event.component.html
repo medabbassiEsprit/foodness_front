@@ -14,7 +14,7 @@
       <th scope="col">dateCreation</th>
       <th scope="col">dateModif</th>
       <th scope="col">nbrParticipants</th>
-      
+
       <th scope="col">typEvent</th>
 
     </tr>
@@ -31,9 +31,13 @@
 <td>{{event.nbrParticipants}}</td>
 <td>{{event.idUsers}}</td>
 <td>{{event.refImage}}</td>
-<td>{{event.imageIds}}</td>
-<td>{{event.typEvent}}</td>
-  </tr>
+<td>{{event.imageId}}</td>
+<td>{{event.typeName}}</td>
+<td>
+  <a [routerLink]="['/events', event._id, 'participation']">
+    <button>View</button>
+  </a>
+</td>  </tr>
 </tbody>
 </table>
 

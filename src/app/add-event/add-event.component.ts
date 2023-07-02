@@ -3,7 +3,8 @@ import { EventService } from '../services/event.service';
 import { Event } from '../Model/event';
 import { Router } from '@angular/router';
 import { ImageServService } from '../services/image-serv.service';
-import { Observable, forkJoin } from 'rxjs';
+import { EventType } from '../Model/eventType';
+import { TypeEventService } from '../services/type-event.service';
 
 @Component({
   selector: 'app-add-event',
@@ -14,14 +15,28 @@ export class AddEventComponent implements OnInit {
   event: Event = new Event();
   images: File[] = []; // Track selected images
   imageUrls: string[] = [];
+  eventTypes: EventType[] = [];
+
 
   constructor(
     private eventService: EventService,
     private router: Router,
-    private imageService: ImageServService
+    private imageService: ImageServService,
+    private typeEventService: TypeEventService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.typeEventService.getAllEventTypes().subscribe(
+      (eventTypes: EventType[]) => {
+        this.eventTypes = eventTypes;
+        console.log('Event types:', this.eventTypes);
+      }
+    );
+  }
+  onTypeSelect(event: any): void {
+    const selectedValue = event.target.value;
+    this.event.typeName = selectedValue;
+  }
 
 
   onFileSelected(event: any) {
@@ -52,14 +67,18 @@ export class AddEventComponent implements OnInit {
     return Promise.all(imagePromises);
   }
 
+
+
   onSubmit(): void {
+    console.log(this.event);
+ this.event.name = this.event.typeName;
     this.eventService.addEvent(this.event,  this.imageUrls).subscribe(
       () => {
         console.log('Event created successfully');
-        this.router.navigate(['/event']); // Navigate to events page
+        this.router.navigate(['/events']); // Navigate to events page
       },
       error => {
-        console.log(this.event);
+        console.log(this.event.typeName);
         console.error('Failed to create event:', error);
         // Handle error
       }

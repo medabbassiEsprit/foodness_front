@@ -754,8 +754,9 @@
             <li><a href="review.html">Review</a></li>
             <li><a href="order.html">Order</a></li>
             <li><a href="order-list.html">Order List</a></li>
-            <li><a routerLink="admin/events"  > Event </a></li>
+            <li><a href="admin/events"  > Event </a></li>
             <li><a href="admin/eventType"  > Event Type </a></li>
+
           </ul>
 
                   </li>
@@ -782,81 +783,48 @@
           <!-- row -->
 
           <style>
-
-            form {
-              padding: 100px;
-              border: 1px solid #ccc;
-              border-radius: 1em;
-              display: grid;
-              gap: 10px;
-            }
-
-            label {
-              display: inline-block;
-              width: 120px;
-              text-align: right;
-              margin-bottom: 5px;
-            }
-
-            textarea {
-              resize: vertical;
+            table {
+             padding-top: 55px;
             }
           </style>
-
-              <form (submit)="onSubmit()">
-                <div class="mb-3">
-                  <label for="Titre" class="form-label">Titre Event</label>
-                  <input type="text" class="form-control" id="Titre" name="Titre" [(ngModel)]="event.Titre" #Title="ngModel">
-                </div>
-                <div class="mb-3">
-                  <label for="typeName" class="form-label">Type Event</label>
-                  <select class="form-select" id="typeName" name="typeName" required [(ngModel)]="event.typeName" (change)="onTypeSelect($event)">
-                    <option value="" disabled selected>Select an Event Type...</option>
-                    <option *ngFor="let eventType of eventTypes ?? []" [value]="eventType.typeName" enable>{{ eventType?.typeName }}</option>
-                  </select>
-
-                </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">description</th>
 
 
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let eventType of eventTypes ">
+              <td>{{eventType.typeName}}</td>
+             
+            </tr>
+          </tbody>
+          </table>
 
+          <div>
+            <a href="admin/eventType/addType"><button>Add Type</button></a>
+          </div>
 
-
-                <div class="mb-3">
-                  <label for="emplacementEvent" class="form-label">Emplacement Event</label>
-                  <input type="text" class="form-control" id="emplacementEvent" name="emplacementEvent" [(ngModel)]="event.emplacementEvent" #emplacementEvent="ngModel">
-                </div>
-                <div class="mb-3">
-                  <label for="description" class="form-label">Description</label>
-                  <textarea class="form-control" id="description" rows="2" name ="description" [(ngModel)]="event.description" #description="ngModel"></textarea>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="dateDeb" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" id="dateDeb" name ="dateDeb" [(ngModel)]="event.dateDeb">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="dateFin" class="form-label">End Date</label>
-                    <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="event.dateFin">
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="organisateur" class="form-label">Organisateur</label>
-                  <input type="text" class="form-control" id="organisateur" name ="organisateur" [(ngModel)]="event.organisateur" >
-                </div>
-                <div class="mb-3">
-                  <label for="nbrParticipants" class="form-label">Nbr Participants</label>
-                  <input type="text" class="form-control" id="nbrParticipants" name ="nbrParticipants" [(ngModel)]="event.nbrParticipants" >
-                </div>
-                <div class="mb-3">
-                  <label for="formFileMultiple" class="form-label">Upload Images</label>
-                  <input class="form-control" type="file" id="formFileMultiple" multiple (change)="onFileSelected($event)">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+      </div>
       <!--**********************************
           Content body end
-      ***********************************-->
+      ***************
+
+
+
+
+
+
+
+
+
+
+
+
+      ********************-->
 
       <!--**********************************
           Footer start
@@ -870,13 +838,10 @@
           Footer end
       ***********************************-->
 
-
+  </div>
   <!--**********************************
       Main wrapper end
   ***********************************-->
 
   <!-- Required vendors -->
-
-
-
 

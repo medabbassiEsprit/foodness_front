@@ -754,7 +754,9 @@
             <li><a href="review.html">Review</a></li>
             <li><a href="order.html">Order</a></li>
             <li><a href="order-list.html">Order List</a></li>
-            <li><a routerLink="/event"  > Event </a></li>
+            <li><a href="admin/events"  > Event </a></li>
+            <li><a href="admin/eventType"  > Event Type </a></li>
+
           </ul>
 
                   </li>
@@ -811,14 +813,14 @@
           <td>{{event.dateCreation| date}}</td>
           <td>{{event.dateModif| date}}</td>
           <td>{{event.nbrParticipants}}</td>
-          <td>{{event.typEvent}}</td>
-          <td><<button routerLink="/participation">View</button>></td>
+          <td>{{event.typeName}}</td>
+
             </tr>
           </tbody>
           </table>
 
           <div>
-            <button routerLink="/addEvent">Add Event</button>
+            <a href="admin/events/addEvent"><button>Add Event</button></a>
           </div>
 
       </div>
