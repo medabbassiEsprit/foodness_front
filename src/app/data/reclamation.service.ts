@@ -48,7 +48,7 @@ export class ReclamationService {
     return this.http.get<any>(`${this.apiUrl}/filter`, { params });
   }
 
-  getReclamationByUserId(id: string): Observable<any> {
+  getReclamationByUserId(id: string){
     return this.http.get<any>(`${this.apiUrl}user/${id}`);
   }
 }

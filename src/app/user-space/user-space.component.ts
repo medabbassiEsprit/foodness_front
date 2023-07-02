@@ -34,8 +34,10 @@ export class UserSpaceComponent implements OnInit {
   }
 
   openPopup(reclamation: Reclamation): void {
+    console.log(reclamation);
     const dialogRef = this.dialog.open(ReclamationPopupComponent, {
       width: '600px',
+      height:'75%',
       data: reclamation
     });
 

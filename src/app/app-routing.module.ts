@@ -14,12 +14,12 @@ const routes: Routes = [
   { path: 'home', component: HomeComponentComponent},
   {path:'login' , component:LoginComponentComponent},
   {path:'register',component:RegisterComponentComponent},
-  {path:'home/space_client', component:UserSpaceComponent},
+  {path:'home/spaceClient', component:UserSpaceComponent},
   {path:'admin',component:AdminComponentComponent},
   {path:'admin/reclamation', component:ViewReclamationComponent},
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'home/spaceClient', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home/spaceClient' }
 
 
 

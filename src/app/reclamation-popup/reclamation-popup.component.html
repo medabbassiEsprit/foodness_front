@@ -1,5 +1,13 @@
-
 <h2>{{ reclamation.recTitle }}</h2>
 <p>Label: {{ reclamation.recLabel }}</p>
 <p>Status: {{ reclamation.recStatus }}</p>
 <p>Created At: {{ reclamation.created_at | date: 'medium' }}</p>
+
+<h3>Replies:</h3>
+<ul>
+  <li *ngFor="let reply of replyList">
+    <p>Content: {{ reply.resContent }}</p>
+    <p>Created At: {{ reply.created_at | date: 'medium' }}</p>
+    <hr>
+  </li>
+</ul>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Reply from './model/reply';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,10 @@ export class ReplyServiceService {
 
   addReply(reply:Reply){
     return this.http.post<Reply>(this.apiUrl, reply);
+  }
+
+  getReplies(userId: string, recId: string): Observable<Reply[]> {
+    const url = `${this.apiUrl}${userId}/${recId}`;
+    return this.http.get<Reply[]>(url);
   }
 }

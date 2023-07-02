@@ -15,6 +15,7 @@ import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
 import { ReclamationPopupComponent } from './reclamation-popup/reclamation-popup.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserSpaceComponent } from './user-space/user-space.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { UserSpaceComponent } from './user-space/user-space.component';
     HttpClientModule,
     FormsModule,
     NoopAnimationsModule,
+    MatDialogModule
 
   ],
   providers: [],
