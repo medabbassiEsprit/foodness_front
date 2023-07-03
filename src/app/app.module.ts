@@ -11,6 +11,11 @@ import { LoginComponentComponent } from './layout/login/login-component/login-co
 import { RegisterComponentComponent } from './layout/register/register-component/register-component.component';
 import { AdminComponentComponent } from './dashborad/admin/admin-component/admin-component.component';
 import { NewplatComponent } from './newplat/newplat.component';
+//import { MenuPlatComponent } from './newmenu/newmenu.component';
+import { RouterModule } from '@angular/router';
+import { PlatviewComponent } from './platview/platview.component';
+import { NewMenuComponent } from './newmenu/newmenu.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +26,10 @@ import { NewplatComponent } from './newplat/newplat.component';
     LoginComponentComponent,
     RegisterComponentComponent,
     AdminComponentComponent,
-    NewplatComponent
+    NewplatComponent,
+    PlatviewComponent,
+    NewMenuComponent
+  
   ],
   imports: [
     BrowserModule,

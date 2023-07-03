@@ -8,7 +8,7 @@ import { Console } from 'console';
   providedIn: 'root'
 })
 export class MenuplatService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000/plat';
   constructor(private http: HttpClient) { }
 
 createPlat(platData: any) {
@@ -18,7 +18,7 @@ createPlat(platData: any) {
     })
   };
 
-  return this.http.post(`${this.apiUrl}/plat/`, platData, httpOptions);
+  return this.http.post(`${this.apiUrl}/`, platData, httpOptions);
 } 
   
   getPlats() {

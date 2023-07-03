@@ -7,6 +7,9 @@ import { RegisterComponentComponent } from './layout/register/register-component
 import { HeaderComponentComponent } from './layout/header/header-component/header-component.component';
 import { AdminComponentComponent } from './dashborad/admin/admin-component/admin-component.component';
 import { NewplatComponent } from './newplat/newplat.component';
+import { PlatviewComponent } from './platview/platview.component';
+import { NewMenuComponent } from './newmenu/newmenu.component';
+
 
 const routes: Routes = [
   {path:'header',component:HeaderComponentComponent},
@@ -15,6 +18,9 @@ const routes: Routes = [
   {path:'register',component:RegisterComponentComponent},
   {path:'admin',component:AdminComponentComponent},
   {path:'plat',component:NewplatComponent},
+  {path:"listplat",component:PlatviewComponent},
+  {path:"addMenu",component:NewMenuComponent},
+
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 

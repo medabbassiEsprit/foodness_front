@@ -757,7 +757,6 @@
               <li><a href="customer-list.html">Customer List</a></li>
               <li><a href="/plat">Ajout Plat</a></li>
               <li><a href="/listplat">List plat</a></li>
-
             </ul>
   
                     </li>
@@ -781,78 +780,51 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            <!-- row -->
+
             <style>
-                  /* Styles pour le formulaire */
-  form {
-    margin: 20px;
-  }
-  
-  fieldset {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="checkbox"] {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
+                .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.card-header {
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+}
+
+.card-body {
+  padding: 10px;
+}
+
             </style>
-           <div class="plat"> 
-            <form (ngSubmit)="onSubmit()">
-                <fieldset>
-                  <legend>Informations du plat</legend>
-                  
-                  <div class="form-group">
-                    <label for="nomduPlat">Nom du Plat:</label>
-                    <input type="text" id="nomduPlat" name="nomduPlat"  [(ngModel)]="newPlat.nomduPlat" >
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="composition">Composition:</label>
-                    <input type="text" id="composition" name="composition" [(ngModel)]="newPlat.composition">
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="details">Détails:</label>
-                    <input type="text" id="details" name="details" [(ngModel)]="newPlat.details">
+            <!-- row -->
+            <div class="grid-container">
+                <div class="grid-item" *ngFor="let plat of listMenu">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3>{{ plat.nomduPlat }}</h3>
                     </div>
-                  <div class="form-group">
-                    <label for="Nombre de Plats">Nombre de Plats:</label>
-                    <input type="number" id="Nombre de Plats" name="Nombre de Plats" [(ngModel)]="newPlat.nombreDePlat">
+                    <div class="card-body">
+                      <p>Composition: {{ plat.composition }}</p>
+                      <p>Détails: {{ plat.details }}</p>
+                      <p>Nombre de Plats: {{ plat.nombreDePlat }}</p>
+                      <p>Disponible: {{ plat.available ? 'Oui' : 'Non' }}</p>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="available">Disponible:</label>
-                    <input type="checkbox" id="available" name="available" [(ngModel)]="newPlat.available">
-                  </div>
-                </fieldset>               
-                
+                </div>
+              </div>
               
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-              
-            </div>
-        </div>
+          
+          
         <!--**********************************
             Content body end
         ***********************************-->
