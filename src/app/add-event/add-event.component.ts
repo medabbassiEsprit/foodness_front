@@ -12,6 +12,7 @@ import { TypeEventService } from '../services/type-event.service';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent implements OnInit {
+  
   event: Event = new Event();
   images: File[] = []; // Track selected images
   imageUrls: string[] = [];
@@ -71,11 +72,12 @@ export class AddEventComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.event);
+    this.event.dateCreation = new Date();
  this.event.name = this.event.typeName;
     this.eventService.addEvent(this.event,  this.imageUrls).subscribe(
       () => {
         console.log('Event created successfully');
-        this.router.navigate(['/events']); // Navigate to events page
+        this.router.navigate(['admin/events']); // Navigate to events page
       },
       error => {
         console.log(this.event.typeName);

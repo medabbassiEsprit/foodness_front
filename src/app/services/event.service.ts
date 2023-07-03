@@ -35,6 +35,8 @@ export class EventService {
     formData.append('organisateur', event.organisateur);
     formData.append('typeName', event.typeName);
     formData.append('nbrParticipants', event.nbrParticipants.toString());
+    formData.append('dateCreation', new Date().toISOString()); // Add the dateCreation property with the current date and time
+
    // formData.append('idUsers', "1s8t11tezt84e78ys1s8ty44y(");
     //formData.append('refImage', event.refImage);
     for (let i = 0; i < images.length; i++) {

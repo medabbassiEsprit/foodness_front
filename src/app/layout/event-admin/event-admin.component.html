@@ -741,89 +741,120 @@
       <!--**********************************
           Sidebar start
       ***********************************-->
-      <div class="deznav">
+      <div class="container-wrapper">
+        <div class="deznav">
           <div class="deznav-scroll">
-      <ul class="metismenu" id="menu">
-                  <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-            <i class="flaticon-dashboard-1"></i>
-            <span class="nav-text">Dashboard</span>
-          </a>
-                      <ul aria-expanded="false">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="analytics.html">Analytics</a></li>
-            <li><a href="review.html">Review</a></li>
-            <li><a href="order.html">Order</a></li>
-            <li><a href="order-list.html">Order List</a></li>
-            <li><a href="admin/events"  > Event </a></li>
-            <li><a href="admin/eventType"  > Event Type </a></li>
+            <ul class="metismenu" id="menu">
+              <li>
+                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                  <i class="flaticon-dashboard-1"></i>
+                  <span class="nav-text">Dashboard</span>
+                </a>
+                <ul aria-expanded="false">
+                  <li><a href="index.html">Dashboard</a></li>
+                  <li><a href="analytics.html">Analytics</a></li>
+                  <li><a href="review.html">Review</a></li>
+                  <li><a href="order.html">Order</a></li>
+                  <li><a href="order-list.html">Order List</a></li>
+                  <li><a href="admin/events">Event</a></li>
+                  <li><a href="admin/eventType">Event Type</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="plus-box">
+              <p class="fs-13 font-w300 mb-4">Organize your menus through button below</p>
+              <a class="btn bg-white text-black btn-rounded d-block" href="javascript:;">+Add Menus</a>
+            </div>
+            <div class="copyright">
+              <p class="fs-14 font-w200"><strong class="font-w400">Koki Restaurant Admin Dashboard</strong> © 2022 All Rights Reserved</p>
+              <p>Made with <span class="heart"></span> by DexignZone</p>
+            </div>
+          </div>
+        </div>
+        <div class="content-body">
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Titre</th>
+                  <th scope="col">Org</th>
+                  <th scope="col">Empl</th>
+                  <th scope="col">D.début</th>
+                  <th scope="col">D.fin</th>
+                  <th scope="col">D.creation</th>
+                  <th scope="col">D.update</th>
+                  <th scope="col">Nbr.part</th>
+                  <th scope="col">Type Event</th>
+                  <th scope="col">URLs</th>
+                  <th scope="col">Acts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let event of events">
+                  <td>{{event.Titre}}</td>
+                  <td>{{event.organisateur}}</td>
+                  <td>{{event.emplacementEvent}}</td>
+                  <td>{{event.dateDeb | date}}</td>
+                  <td>{{event.dateFin | date}}</td>
+                  <td>{{event.dateCreation | date}}</td>
+                  <td>{{event.dateModif | date}}</td>
+                  <td>{{event.nbrParticipants}}</td>
+                  <td>{{event.typeName}}</td>
+                  <td><a href="{{event.imageId}}">{{event.imageId}}</a></td>
+                  <td><button class="btn btn-blue" (click)="deleteEvent(event._id)">Remove</button></td>
 
-          </ul>
-
-                  </li>
-      </ul>
-
-      <div class="plus-box">
-        <p class="fs-13 font-w300 mb-4">Organize your menus through button bellow</p>
-        <a class="btn bg-white text-black btn-rounded d-block" href="javascript:;">+Add Menus</a>
-      </div>
-      <div class="copyright">
-        <p class="fs-14 font-w200"><strong class="font-w400">Koki Restaurant Admin Dashboard</strong> © 2022 All Rights Reserved</p>
-        <p>Made with <span class="heart"></span> by DexignZone</p>
-      </div>
-    </div>
-      </div>
-      <!--**********************************
-          Sidebar end
-      ***********************************-->
-
-  <!--**********************************
-          Content body start
-      ***********************************-->
-      <div class="content-body">
-          <!-- row -->
-
-          <style>
-            table {
-             padding-top: 55px;
-            }
-          </style>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Titre</th>
-                <th scope="col">organisateur</th>
-                <th scope="col">emplacementEvent</th>
-                <th scope="col">dateDeb</th>
-                <th scope="col">dateFin</th>
-                <th scope="col">dateCreation</th>
-                <th scope="col">dateModif</th>
-                <th scope="col">nbrParticipants</th>
-
-                <th scope="col">typEvent</th>
-
+                    <td><button class="btn btn-blue" (click)="getEvent(event._id)" [routerLink]="['/events', event._id, 'participation']">Detls</button>
+                  </td>
               </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let event of events">
-              <td>{{event.Titre}}</td>
-              <td>{{event.organisateur}}</td>
-              <td>{{event.emplacementEvent}}</td>
-              <td>{{event.dateDeb| date}}</td>
-          <td>{{event.dateFin| date}}</td>
-          <td>{{event.dateCreation| date}}</td>
-          <td>{{event.dateModif| date}}</td>
-          <td>{{event.nbrParticipants}}</td>
-          <td>{{event.typeName}}</td>
-
-            </tr>
-          </tbody>
-          </table>
-
-          <div>
-            <a href="admin/events/addEvent"><button>Add Event</button></a>
+              </tbody>
+            </table>
           </div>
 
+          <div class="add-event-button">
+            <a href="admin/events/addEvent">
+              <button class="btn" >Add Event</button>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <style>
+        .container-wrapper {
+          display: flex;
+        }
+
+        .deznav {
+          width: 250px;
+          /* Add your desired styles for the sidebar here */
+        }
+
+        .content-body {
+          flex-grow: 1;
+          overflow: auto;
+          padding: 20px;
+        }
+
+        .table-container {
+          width: 100%;
+        }
+
+        /* Add your desired styles for the table container here */
+
+        .table-container table {
+          width: 100%;
+        }
+
+        /* Add your desired styles for the table here */
+
+        .btn {
+          background-color: blue;
+          color: white;
+        }
+
+            </style>
+
+
+
       <!--**********************************
           Content body end
       ***********************************-->
