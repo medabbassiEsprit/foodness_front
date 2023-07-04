@@ -18,6 +18,8 @@ import { UpdateProfileComponent } from './layout/update-profile/update-profile.c
 import { UpdateDashComponent } from './dashborad/update-dash/update-dash.component';
 import { DatePipe } from '@angular/common';
 import { DateFormatPipe } from './date-format.pipe';
+import { DashboardComponent } from './layout/Don/dashboard/dashboard.component';
+import { ParticiperComponent } from './layout/Don/participer/participer.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { DateFormatPipe } from './date-format.pipe';
     UpdateProfileComponent,
     UpdateDashComponent,
     DateFormatPipe,
+    DashboardComponent,
+    ParticiperComponent
     
   ],
   imports: [

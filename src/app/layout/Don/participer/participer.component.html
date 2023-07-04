@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="card bg-white">
+   
+      <div class="card-body">
+       <table class="table">
+        <tbody>       
+           <tr>
+          <td>
+            Description :
+          </td>
+          <td>
+             {{ don?.Description }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Organization : 
+          </td>
+          <td>
+            {{ don?.RefOrganization?.nom }}
+          </td>
+        </tr>
+        <tr>
+          <td> TypeOfDon : 
+          
+          </td>
+          <td>
+            {{ don?.RefTypeOfDon?.name }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="progress" style="height: 15px;">
+              <div class="progress-bar" role="progressbar" [style.width]="progress.toString() + '%'" [attr.aria-valuenow]="progress.toString()" aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
+            </div>
+        </td>
+        </tr>
+      </tbody>
+
+       </table>
+       
+     
+        
+        
+         
+
+        <form [formGroup]="ParticiperForm" (ngSubmit)="onSubmit()">
+          
+          <label  *ngIf="don?.RefTypeOfDon?.name=='plats'" for="first-name">Quantite</label>
+          <label  *ngIf="don?.RefTypeOfDon?.name=='money'" for="first-name">Amount</label>
+
+          <input id="first-name" type="number" class="form-control" formControlName="quantite">
+        
+          <button type="submit" class="mt-2 col-3 btn btn-primary">Submit</button>
+
+        </form>
+         </div>
+        </div>
+  </div>
+

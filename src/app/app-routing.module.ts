@@ -12,6 +12,7 @@ import { RoleDashComponent } from './dashborad/role-dash/role-dash.component';
 import { UpdateProfileComponent } from './layout/update-profile/update-profile.component';
 import { UpdateDashComponent } from './dashborad/update-dash/update-dash.component';
 import { AuthGuard } from './dashborad/auth.guard';
+import { DashboardComponent } from './layout/Don/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path:'editProfile' , component:UpdateProfileComponent},
   {path:'update/:id' , component:UpdateDashComponent},
   {path:'role' , component:RoleDashComponent},
+  {path:"don", component:DashboardComponent},
   {path:'register',component:RegisterComponentComponent},
   {path:'admin',component:AdminComponentComponent},
   // {path:'admin',component:AdminComponentComponent,canActivate: [AuthGuard],data: {role: 'ROLE_ADMIN'} },
