@@ -1,0 +1,67 @@
+<div class="col-xl-6 col-lg-12" style="margin-left: 25%; margin-top: 5%;">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Edit Profile</h4>
+    </div>
+    <div class="card-body">
+      <div class="basic-form">
+        <form #f="ngForm" (ngSubmit)="saveUser()">
+          <div class="row">
+            <div class="form-group mb-3 col-md-6">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" class="form-control" placeholder="username" id="username" name="username"
+                [(ngModel)]="user.username" required minlength="3" maxlength="20" />
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label class="form-label" for="email">Email</label>
+              <input type="text" readonly class="form-control-plaintext" id="email" [value]="user.email"
+                required name="email" />
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label class="mb-1" for="profesion"><strong>Profession</strong></label>
+              <input type="text" class="form-control" id="profesion" name="profesion" [(ngModel)]="user.profesion"
+                required minlength="6" />
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label class="mb-1" for="dateNaissance"><strong>DateNaissance</strong></label>
+              <input type="date" class="form-control" id="dateNaissance" name="dateNaissance"
+                value="{{ user.dateNaissance | dateFormat}}"
+                [(ngModel)]="user.dateNaissance" required />
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label for="bio">Bio</label>
+              <input type="text" class="form-control" id="bio" name="bio" [(ngModel)]="user.bio" #bio="ngModel">
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label for="adress">Address</label>
+              <input type="text" class="form-control" id="adress" name="adress" [(ngModel)]="user.adress" #adress="ngModel">
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label for="ville">City</label>
+              <input type="text" class="form-control" id="ville" name="ville" [(ngModel)]="user.ville" #ville="ngModel">
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label for="codePostal">Postal Code</label>
+              <input type="number" class="form-control" id="codePostal" name="codePostal"
+                [(ngModel)]="user.codePostal" #codePostal="ngModel">
+            </div>
+            <div class="form-group mb-3 col-md-6">
+              <label for="numTel">Phone Number</label>
+              <input type="tel" class="form-control" id="numTel" name="numTel" [(ngModel)]="user.numTel" #numTel="ngModel">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label class="form-label" for="sexe">Sexe</label>
+              <select id="sexe" class="default-select form-control wide" name="sexe" [(ngModel)]="user.sexe">
+                <option selected>Choose...</option>
+                <option *ngFor="let sex of sexe" [value]="sex">{{ sex }}</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

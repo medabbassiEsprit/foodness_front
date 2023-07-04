@@ -1,24 +1,125 @@
- <!-- Register modal -->
- <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modal-popup">
-      <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-      <form action="#" class="popup-form" id="myRegister">
-                <div class="login_icon"><i class="icon_lock_alt"></i></div>
-        <input type="text" class="form-control form-white" placeholder="Name">
-        <input type="text" class="form-control form-white" placeholder="Last Name">
-                  <input type="email" class="form-control form-white" placeholder="Email">
-                  <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
-                  <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
-                  <div id="pass-info" class="clearfix"></div>
-        <div class="checkbox-holder text-left">
-          <div class="checkbox">
-            <input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-            <label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-          </div>
+
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+									<div class="text-center mb-3">
+                    <img src="./assets/img/food.png" alt="" style="width: 150px; height: 100px;">
+									</div>
+                                    <h4 class="text-center mb-4">Sign up your account</h4>
+                                    <form action="index.html"  *ngIf="!isSuccessful"
+                                    name="form"
+                                    (ngSubmit)="f.form.valid && onSubmit()"
+                                    #f="ngForm"
+                                    novalidate  >
+                                        <div class="form-group">
+                                            <label class="mb-1" for="username"><strong>Username</strong></label>
+                                            <input type="text" class="form-control" placeholder="username" name="username"
+                                            [(ngModel)]="form.username"
+                                            required
+                                            minlength="3"
+                                            maxlength="20"
+                                            #username="ngModel" />
+                                            <div class="alert-danger" *ngIf="username.errors && f.submitted">
+                                              <div *ngIf="username.errors['required']">Username is required</div>
+                                              <div *ngIf="username.errors['minlength']">
+                                                Username must be at least 3 characters
+                                              </div>
+                                              <div *ngIf="username.errors['maxlength']">
+                                                Username must be at most 20 characters
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1" for="email"><strong>Email</strong></label>
+                                            <input type="email" class="form-control" placeholder="hello@example.com"  name="email"
+                                            [(ngModel)]="form.email"
+                                            required
+                                            email
+                                            #email="ngModel" />
+                                            <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                                              <div *ngIf="email.errors['required']">Email is required</div>
+                                              <div *ngIf="email.errors['email']">
+                                                Email must be a valid email address
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1" for="password"><strong>Password</strong></label>
+                                            <input type="password" class="form-control" value="Password"  name="password"
+                                            [(ngModel)]="form.password"
+                                            required
+                                            minlength="6"
+                                            #password="ngModel" />
+                                            <div class="alert-danger" *ngIf="password.errors && f.submitted">
+                                              <div *ngIf="password.errors['required']">Password is required</div>
+                                              <div *ngIf="password.errors['minlength']">
+                                                Password must be at least 6 characters
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="mb-1" for="profesion"><strong>Profession</strong></label>
+                                          <input type="text" class="form-control" value="profesion"  name="profesion"
+                                          [(ngModel)]="form.profesion"
+                                          required
+                                          minlength="6"
+                                          #profesion="ngModel" />
+                                          <div class="alert-danger" *ngIf="profesion.errors && f.submitted">
+                                            <div *ngIf="profesion.errors['required']">Profession is required</div>
+                                            <div *ngIf="profesion.errors['minlength']">
+                                              Profession must be at least 6 characters
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="mb-1" for="dateNaissance"><strong>DateNaissance</strong></label>
+                                        <input type="date" class="form-control" value="dateNaissance"  name="dateNaissance"
+                                        [(ngModel)]="form.dateNaissance"
+                                        required
+                                        #dateNaissance="ngModel" />
+                                    </div>
+                                        <div class="form-group">
+                                          <label for="role">Role</label>
+                                          <select class="form-control" id="role" name="role" [(ngModel)]="form.roles" required>
+                                            <option value="">Select a role</option>
+                                            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-group" *ngIf="form.roles==='association'">
+                                          <label class="mb-1" for="file"><strong>Attach File</strong></label>
+                                          <input type="file" class="form-control" value="file"  name="file" (change)="onChange($event)"
+                                          required />
+                                      </div>
+                                        <div class=" form-group text-center mt-4">
+                                            <button type="submit" class="btn btn-primary btn-block" >Sign me up</button>
+                                        </div>
+                                        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                                          Signup failed!<br />{{ errorMessage }}
+                                        </div>
+
+                                    </form>
+                                    <div class="alert alert-success" *ngIf="isSuccessful">
+                                      Your registration is successful!
+                                    </div>
+                                    <div class="new-account mt-3">
+                                        <p>Already have an account? <a class="text-primary" routerLink="/login">Sign in</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-submit">Register</button>
-      </form>
     </div>
-  </div>
-  </div><!-- End Register modal -->
+
+<!--**********************************
+	Scripts
+***********************************-->
+
+

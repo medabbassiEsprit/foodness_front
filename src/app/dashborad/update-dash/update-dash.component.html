@@ -1,0 +1,60 @@
+<div class="col-xl-6 col-lg-12" style="margin-left: 25%;margin-top: 5%;">
+  <div class="card">
+      <div class="card-header">
+          <h4 class="card-title">Edit Profile</h4>
+      </div>
+      <div class="card-body">
+          <div class="basic-form">
+              <!-- <form #f="ngForm" *ngIf="currentUser ; else loggedOut"> -->
+                <form #f="ngForm"  (ngSubmit)="saveUser()">
+                  <div class="row">
+                      <div class="form-group mb-3 col-md-6">
+                          <label class="form-label" for="username">Username</label>
+                          <input type="text" class="form-control" placeholder="username" id="username" name="username"
+                                            [(ngModel)]="user.username"
+                                            required
+                                            minlength="3"
+                                            maxlength="20"
+                                            />
+
+                      </div>
+                      <div class="form-group mb-3 col-md-6">
+                          <label class="form-label" for="email">Email</label>
+                          <input type="text" class="form-control" id="email" value="email@example.com"
+                          [(ngModel)]="user.email"
+                          required
+                          name="email" />
+                        </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label class="form-label" for="roles">Role</label>
+                        <select id="roles" class="default-select form-control wide" name="roles" [(ngModel)]="user.roles">
+                            <option selected >Choose...</option>
+                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                  <div class="row">
+                      <div class="mb-3 col-md-4">
+                          <label class="form-label" for="status">Status</label>
+                          <select id="status" class="default-select form-control wide" name="status" [(ngModel)]="user.status">
+                              <option selected >Choose...</option>
+                              <option *ngFor="let statut of status" [value]="statut">{{statut}}</option>
+                          </select>
+                      </div>
+
+                  </div>
+
+                  <button type="submit" class="btn btn-primary"  >Update</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- <ng-template #loggedOut>
+  Please login.
+</ng-template> -->
