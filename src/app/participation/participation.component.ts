@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Event } from '../Model/event';
 import { EventService } from '../services/event.service';
 import { on } from 'events';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-participation',
@@ -15,7 +16,8 @@ export class ParticipationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -37,4 +39,8 @@ export class ParticipationComponent implements OnInit {
 
     );
   }
+  return(): void {
+    this.location.back();
+  }
+
 }

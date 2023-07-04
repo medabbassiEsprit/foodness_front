@@ -39,11 +39,23 @@
     width: 100%;
     height: auto;
   }
+  .btn btn-blue {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
 </style>
+<div class="event-container">
+  <ng-container *ngIf="event">
+  <h1><strong>Event name is:</strong><br>{{ event.Titre }}</h1>
 
 <h1>Event Details</h1>
 
-<div class="event-container" *ngIf="event">
   <h1><strong>Event name is:</strong><br>{{ event.Titre }}</h1>
   <p><strong>Organisateur:</strong> {{ event.organisateur }}</p>
   <p><strong>Emplacement:</strong> {{ event.emplacementEvent }}</p>
@@ -52,8 +64,7 @@
   <p><strong>Date de création:</strong> {{ event.dateCreation | date }}</p>
   <p><strong>Date de modification:</strong> {{ event.dateModif | date }}</p>
   <p><strong>Nombre de participants:</strong> {{ event.nbrParticipants }}</p>
-  <p><strong>Nombre de 1participants:</strong> {{ event.imageId }}</p>
-  <p><strong>Nombre de2 participants:</strong> {{ event.imageId[1] }}</p>
+  <p> {{ event.imageId }}</p>
   <div class="image-grid">
     <a *ngFor="let imageUrl of event.imageId; let i = index" [href]="imageUrl" target="_blank">
       <img [src]="imageUrl" alt="Event Image {{ i + 1 }}">
@@ -61,4 +72,10 @@
   </div>
 
   <p><strong>Number of Images:</strong> {{ event.imageId.length }}</p>
+  <div>
+    <button class="btn btn-blue" (click)="return()">Return</button>
+  </div>
+</ng-container>
+<p class="event-not-found" *ngIf="!event">Event not found.</p>
 </div>
+

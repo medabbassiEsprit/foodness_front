@@ -12,13 +12,13 @@ import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventService } from './services/event.service';
-import { EventComponent } from './event/event.component';
-import { EventAdminComponent } from './layout/event-admin/event-admin.component';
+import { EventComponent } from './layout/event/event.component';
+import { EventAdminComponent } from './dashborad/event-admin/event-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddEventComponent } from './add-event/add-event.component';
 import { ParticipationComponent } from './participation/participation.component';
-import { TypeeventComponent } from './typeevent/typeevent.component';
-import { AddTypeEventComponent } from './add-type-event/add-type-event.component';
+import { TypeeventComponent } from './dashborad/typeevent/typeevent.component';
+import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { AddTypeEventComponent } from './add-type-event/add-type-event.component
     AddEventComponent,
     ParticipationComponent,
     TypeeventComponent,
-    AddTypeEventComponent
+    AddTypeEventComponent,
+
   ],
   imports: [
     BrowserModule,
