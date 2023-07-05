@@ -66,4 +66,5 @@ export class EventService {
     const url = `${this.apiUrl}${eventId}`;
     return this.http.delete<any>(url);
   }
+  
 }

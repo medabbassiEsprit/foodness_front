@@ -779,121 +779,130 @@
           Content body start
       ***********************************-->
       <div class="content-body">
-          <!-- row -->
+        <!-- row -->
+        <style>
+          form {
+            padding: 100px;
+            border: 1px solid #ccc;
+            border-radius: 1em;
+            display: grid;
+            gap: 10px;
+          }
 
-          <style>
+          label {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+            margin-bottom: 5px;
+          }
 
-            form {
-              padding: 100px;
-              border: 1px solid #ccc;
-              border-radius: 1em;
-              display: grid;
-              gap: 10px;
-            }
+          textarea {
+            resize: vertical;
+          }
+        </style>
 
-            label {
-              display: inline-block;
-              width: 120px;
-              text-align: right;
-              margin-bottom: 5px;
-            }
+        <form (submit)="onSubmit()" #eventForm="ngForm">
+          <div class="mb-3">
+            <label for="Titre" class="form-label">Titre Event</label>
+            <input type="text" class="form-control" id="Titre" name="Titre" [(ngModel)]="event.Titre" required #Title="ngModel">
+            <div *ngIf="Title.invalid && (Title.dirty || Title.touched)" class="text-danger">
+              Title is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="typeName" class="form-label">Type Event</label>
+            <select class="form-select" id="typeName" name="typeName" required [(ngModel)]="event.typeName" (change)="onTypeSelect($event)">
+              <option value="" disabled>Select an Event Type...</option>
+              <option *ngFor="let eventType of eventTypes ?? []" [value]="eventType.typeName">{{ eventType?.typeName }}</option>
+            </select>
+            <div *ngIf="eventForm.controls['typeName'].invalid && (eventForm.controls['typeName'].dirty || eventForm.controls['typeName'].touched)" class="text-danger">
+              Type is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="emplacementEvent" class="form-label">Emplacement Event</label>
+            <select class="form-select" id="emplacementEvent" name="emplacementEvent" [(ngModel)]="event.emplacementEvent" required #emplacementEvent="ngModel">
+              <option value="" disabled>Select an Emplacement...</option>
+              <option value="grand tunis">Grand Tunis</option>
+              <option value="jandouba">Jandouba</option>
+              <option value="beja">Beja</option>
+              <option value="bizert">Bizert</option>
+              <option value="siliana">Siliana</option>
+              <option value="le kef">Le Kef</option>
+              <option value="gasrin">Gasrin</option>
+              <option value="sidi bouzid">Sidi Bouzid</option>
+              <option value="gafssa">Gafssa</option>
+              <option value="tozeur">Tozeur</option>
+              <option value="gbelli">Gbelli</option>
+              <option value="tatouin">Tatouin</option>
+              <option value="mednin">Mednin</option>
+              <option value="gabes">Gabes</option>
+              <option value="sfax">Sfax</option>
+              <option value="sousse">Sousse</option>
+              <option value="mestir">Mestir</option>
+              <option value="mahdia">Mahdia</option>
+              <option value="nabel">Nabel</option>
+            </select>
+            <div *ngIf="emplacementEvent.invalid && (emplacementEvent.dirty || emplacementEvent.touched)" class="text-danger">
+              Emplacement is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="2" name="description" [(ngModel)]="event.description" required #description="ngModel"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+              Description is required.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="dateDeb" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="dateDeb" name="dateDeb"
+                   [(ngModel)]="event.dateDeb" required #dateDebInput="ngModel"
+                   [min]="getCurrentDate()">
+            <div *ngIf="dateDebInput.invalid && (dateDebInput.dirty || dateDebInput.touched)" class="text-danger">
+              Invalid Start Date.
+            </div>
+          </div>
 
-            textarea {
-              resize: vertical;
-            }
-          </style>
+          <div class="col-md-6">
+            <label for="dateFin" class="form-label">End Date</label>
+            <input type="date" class="form-control" id="dateFin" name="dateFin"
+                   [(ngModel)]="event.dateFin" required #dateFinInput="ngModel"
+                   [min]="event.dateDeb">
+            <div *ngIf="dateFinInput.invalid && (dateFinInput.dirty || dateFinInput.touched)" class="text-danger">
+              Invalid End Date.
+            </div>
+            <div *ngIf="event.dateDeb && event.dateFin && (event.dateFin < event.dateDeb)" class="text-danger">
+              End Date must be after or equal to Start Date.
+            </div>
+            <div *ngIf="event.dateDeb && event.dateFin && isDatePeriodExceeded()" class="text-danger">
+              The period between the Start Date and End Date cannot exceed 6 days.
+            </div>
+          </div>
 
-          <form (submit)="onSubmit()" #eventForm="ngForm">
-            <div class="mb-3">
-              <label for="Titre" class="form-label">Titre Event</label>
-              <input type="text" class="form-control" id="Titre" name="Titre" [(ngModel)]="event.Titre" required #Title="ngModel">
-              <div *ngIf="Title.invalid && (Title.dirty || Title.touched)" class="text-danger">
-                Title is required.
-              </div>
+          <div class="mb-3">
+            <label for="organisateur" class="form-label">Organisateur</label>
+            <input type="text" class="form-control" id="organisateur" name="organisateur" [(ngModel)]="event.organisateur" required #organisateur="ngModel">
+            <div *ngIf="organisateur.invalid && (organisateur.dirty || organisateur.touched)" class="text-danger">
+              Organisateur is required.
             </div>
-            <div class="mb-3">
-              <label for="typeName" class="form-label">Type Event</label>
-              <select class="form-select" id="typeName" name="typeName" required [(ngModel)]="event.typeName" (change)="onTypeSelect($event)">
-                <option value="" disabled>Select an Event Type...</option>
-                <option *ngFor="let eventType of eventTypes ?? []" [value]="eventType.typeName">{{ eventType?.typeName }}</option>
-              </select>
-              <div *ngIf="eventForm.controls['typeName'].invalid && (eventForm.controls['typeName'].dirty || eventForm.controls['typeName'].touched)" class="text-danger">
-                Type is required.
-              </div>
+          </div>
+          <div class="mb-3">
+            <label for="nbrParticipants" class="form-label">Nbr Participants</label>
+            <input type="number" class="form-control" id="nbrParticipants" name="nbrParticipants" [(ngModel)]="event.nbrParticipants" required
+              min="2" #nbrParticipants="ngModel">
+            <div *ngIf="nbrParticipants.invalid && (nbrParticipants.dirty || nbrParticipants.touched)" class="text-danger">
+              Nbr Participants must be at least 2.
             </div>
-            <div class="mb-3">
-              <label for="emplacementEvent" class="form-label">Emplacement Event</label>
-              <select class="form-select" id="emplacementEvent" name="emplacementEvent" [(ngModel)]="event.emplacementEvent" required #emplacementEvent="ngModel">
-                <option value="" disabled>Select an Emplacement...</option>
-                <option value="grand tunis">Grand Tunis</option>
-                <option value="jandouba">Jandouba</option>
-                <option value="beja">Beja</option>
-                <option value="bizert">Bizert</option>
-                <option value="siliana">Siliana</option>
-                <option value="le kef">Le Kef</option>
-                <option value="gasrin">Gasrin</option>
-                <option value="sidi bouzid">Sidi Bouzid</option>
-                <option value="gafssa">Gafssa</option>
-                <option value="tozeur">Tozeur</option>
-                <option value="gbelli">Gbelli</option>
-                <option value="tatouin">Tatouin</option>
-                <option value="mednin">Mednin</option>
-                <option value="gabes">Gabes</option>
-                <option value="sfax">Sfax</option>
-                <option value="sousse">Sousse</option>
-                <option value="mestir">Mestir</option>
-                <option value="mahdia">Mahdia</option>
-                <option value="nabel">Nabel</option>
-              </select>
-              <div *ngIf="emplacementEvent.invalid && (emplacementEvent.dirty || emplacementEvent.touched)" class="text-danger">
-                Emplacement is required.
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" rows="2" name="description" [(ngModel)]="event.description" required #description="ngModel"></textarea>
-              <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
-                Description is required.
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="dateDeb" class="form-label">Start Date</label>
-                <input type="date" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="event.dateDeb" required #dateDeb="ngModel">
-                <div *ngIf="dateDeb.invalid && (dateDeb.dirty || dateDeb.touched)" class="text-danger">
-                  Invalid Start Date.
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="dateFin" class="form-label">End Date</label>
-                <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="event.dateFin" required #dateFin="ngModel">
-                <div *ngIf="dateFin.invalid && (dateFin.dirty || dateFin.touched)" class="text-danger">
-                  Invalid End Date.
-                </div>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="organisateur" class="form-label">Organisateur</label>
-              <input type="text" class="form-control" id="organisateur" name="organisateur" [(ngModel)]="event.organisateur" required #organisateur="ngModel">
-              <div *ngIf="organisateur.invalid && (organisateur.dirty || organisateur.touched)" class="text-danger">
-                Organisateur is required.
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="nbrParticipants" class="form-label">Nbr Participants</label>
-              <input type="number" class="form-control" id="nbrParticipants" name="nbrParticipants" [(ngModel)]="event.nbrParticipants" required
-                min="2" #nbrParticipants="ngModel">
-              <div *ngIf="nbrParticipants.invalid && (nbrParticipants.dirty || nbrParticipants.touched)" class="text-danger">
-                Nbr Participants must be at least 2.
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="formFileMultiple" class="form-label">Upload Images</label>
-              <input class="form-control" type="file" id="formFileMultiple" multiple (change)="onFileSelected($event)">
-            </div>
-            <button type="submit" class="btn btn-primary" style="background-color: blue;">Submit</button>
+          </div>
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Upload Images</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple (change)="onFileSelected($event)">
+          </div>
+          <button type="submit" class="btn btn-primary" style="background-color: blue;">Submit</button>
+        </form>
+      </div>
 
-          </form>
 
       <!--**********************************
           Content body end

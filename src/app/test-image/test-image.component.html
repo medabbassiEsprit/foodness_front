@@ -1,0 +1,120 @@
+<div class="event-grid" style="padding-top: 90px; padding-left: 30px; padding-right: 30px;">
+  <div class="card" *ngFor="let event of events">
+    <h2 class="card-title">{{ event.Titre }}</h2>
+
+      <p class="tooltip-wrapper">
+        <button type="button" class="btn"
+          (mouseenter)="event.showTooltip = true"
+          (mouseleave)="event.showTooltip = false">
+          Event description
+        </button>
+        <span class="tooltip" [ngClass]="{ 'show': event.showTooltip }">{{ event.description }}</span>
+
+    </p>
+    <p><strong>Start Date:</strong> <span class="animated-dates">{{ event.dateDeb | date }}</span></p>
+    <p><strong>End Date:</strong> <span class="animated-dates">{{ event.dateFin | date }}</span></p>
+    <div class="scrollable-images">
+      <img [src]="'../../assets/images/img/istockphoto-1124263173-1024x1024.jpg'" alt="Image1">
+      <img [src]="'../../assets/images/img/istockphoto-1177485677-1024x1024.jpg'" alt="Image2">
+      <img [src]="'../../assets/images/img/istockphoto-665393236-1024x1024.jpg'" alt="Image3">
+      <img [src]="'../../assets/images/img/istockphoto-926907354-1024x1024.jpg'" alt="Image4">
+    </div>
+    <svg width="100" height="100" viewBox="00100100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        path {
+          animation: stroke 5s infinite linear;
+        }
+
+        @keyframes stroke {
+          to {
+            stroke-dashoffset: 776;
+          }
+        }
+      </style>
+
+      <linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%" stopoffset="0%" stop-color="#24FE41"
+        stopoffset="25%" stop-color="#24FE41" stopoffset="50%" stop-color="#38ef7d" stopoffset="100%"
+        stop-color="#38ef7d">
+      </linearGradient>
+
+      <path d="M1.51.5l970l097l-970l0-97" stroke-linecap="square" stroke="url(#g)" stroke-width="3"
+        stroke-dasharray="385" />
+    </svg>
+  </div>
+</div>
+
+<style>
+  .event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #d0dac3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .scrollable-images {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .scrollable-images img {
+    width: 200px;
+    height: auto;
+    margin-right: 10px;
+    scroll-snap-align: start;
+  }
+
+  svg {
+    width: 100px;
+    height: 100px;
+  }
+
+  .animated-dates {
+    font-weight: bold;
+  }
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: #ffffff;
+    color: #0a0909;
+    padding: 5px;
+    border-radius: 50%;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .tooltip.show {
+    opacity: 1;
+  }
+</style>

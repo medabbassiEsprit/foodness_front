@@ -11,6 +11,7 @@ import { EventAdminComponent } from './dashborad/event-admin/event-admin.compone
 import { ParticipationComponent } from './participation/participation.component';
 import { TypeeventComponent } from './dashborad/typeevent/typeevent.component';
 import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event.component';
+import { TestImageComponent } from './test-image/test-image.component';
 
 
 
@@ -26,8 +27,7 @@ const routes: Routes = [
   { path: 'events/:eventId/participation', component: ParticipationComponent },
   {path:'admin/eventType',component:TypeeventComponent},
   {path:'admin/eventType/addType',component:AddTypeEventComponent},
-
-
+  {path: 'testimage', component: TestImageComponent},
 
 
   {path:'**',redirectTo:'/home',pathMatch:'full'},

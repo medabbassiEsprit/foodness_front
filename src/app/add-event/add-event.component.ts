@@ -12,12 +12,12 @@ import { TypeEventService } from '../services/type-event.service';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent implements OnInit {
-  
+
   event: Event = new Event();
   images: File[] = []; // Track selected images
   imageUrls: string[] = [];
   eventTypes: EventType[] = [];
-
+  isPeriodInvalid = false;
 
   constructor(
     private eventService: EventService,
@@ -34,11 +34,26 @@ export class AddEventComponent implements OnInit {
       }
     );
   }
+
+  isDatePeriodExceeded(): boolean {
+    if (this.event.dateDeb && this.event.dateFin) {
+      const startDate = new Date(this.event.dateDeb);
+      const endDate = new Date(this.event.dateFin);
+      const durationInDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+      return durationInDays > 6;
+    }
+    return false;
+  }
+
+  getCurrentDate(): string {
+    const currentDate = new Date();
+    return currentDate.toISOString().split('T')[0];
+  }
+
   onTypeSelect(event: any): void {
     const selectedValue = event.target.value;
     this.event.typeName = selectedValue;
   }
-
 
   onFileSelected(event: any) {
     this.images = event.target.files as File[]; // Store the selected images as an array
@@ -48,10 +63,10 @@ export class AddEventComponent implements OnInit {
         (imageUrls: string[]) => {
           this.imageUrls = imageUrls;
           // Store the uploaded image URLs
-          console.log( this.imageUrls);
+          console.log(this.imageUrls);
         },
         error => {
-          console.log( this.imageUrls)
+          console.log(this.imageUrls);
           console.error('Failed to upload images:', error);
           // Handle error
         }
@@ -68,19 +83,20 @@ export class AddEventComponent implements OnInit {
     return Promise.all(imagePromises);
   }
 
-
-
   onSubmit(): void {
+    if (this.isPeriodInvalid) {
+      console.log('Invalid period: Start Date must be before End Date');
+      return; // Don't submit the form
+    }
     console.log(this.event);
     this.event.dateCreation = new Date();
- this.event.name = this.event.typeName;
-    this.eventService.addEvent(this.event,  this.imageUrls).subscribe(
+    this.event.name = this.event.typeName;
+    this.eventService.addEvent(this.event, this.imageUrls).subscribe(
       () => {
         console.log('Event created successfully');
         this.router.navigate(['admin/events']); // Navigate to events page
       },
       error => {
-        console.log(this.event.typeName);
         console.error('Failed to create event:', error);
         // Handle error
       }

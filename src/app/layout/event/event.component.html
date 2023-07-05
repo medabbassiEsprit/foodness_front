@@ -1,23 +1,40 @@
-<div class="event-grid" style="padding-top: 70px; padding-left: 30px; padding-right: 30px;">
+<div class="event-grid" style="padding-top: 90px; padding-left: 30px; padding-right: 30px;">
   <div class="card" *ngFor="let event of events; let i = index">
-    <img [src]="event.refImage" alt="Event Image">
+    <img [src]="event.imageId" alt="Event Image">
     <div class="card-body">
       <h2 class="card-title">{{ event.Titre }}</h2>
+
+      <div class="tooltip-wrapper">
+        <button type="button" class="btn"
+          (mouseenter)="event.showTooltip = true"
+          (mouseleave)="event.showTooltip = false">
+          Event description
+        </button>
+        <span class="tooltip" [ngClass]="{ 'show': event.showTooltip }">{{ event.description }}</span>
+      </div>
+
       <p><strong>Organizer:</strong> {{ event.organisateur }}</p>
       <p><strong>Location:</strong> {{ event.emplacementEvent }}</p>
-      <p><strong>Start Date:</strong> {{ event.dateDeb | date }}</p>
-      <p><strong>End Date:</strong> {{ event.dateFin | date }}</p>
-      <p><strong>Creation Date:</strong> {{ event.dateCreation | date }}</p>
-      <p><strong>Modification Date:</strong> {{ event.dateModif | date }}</p>
+      <p><strong>Start Date:</strong> {{ event.dateDeb }}</p>
+      <p><strong>End Date:</strong> {{ event.dateFin }}</p>
+      <p><strong>Creation Date:</strong> {{ event.dateCreation }}</p>
+      <p><strong>Modification Date:</strong> {{ event.dateModif }}</p>
       <p><strong>No. of Participants:</strong> {{ event.nbrParticipants }}</p>
-      <!-- Add more event details or elements here -->
+      <!-- Add more event details or elements here (click)="addUserToEvent(event._id, { id: '1' })" -->
       <div class="button-container">
-
         <button class="participate-button">Participate</button>
       </div>
     </div>
   </div>
 </div>
+
+<div style="padding-left: 30px;">
+  <button class="a" routerLink="">Add Event</button>
+</div>
+<div style="padding-left: 30px;">
+  <button class="a" routerLink="/testimage">test</button>
+</div>
+
 
 <style>
   .event-grid {
@@ -80,9 +97,41 @@ cursor: pointer;
 font-size: 14px;
 
 }
+.btn {
+background-color: #007bff;
+color: #fff;
+border-radius: 5px;
+}
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #ffffff;
+  color: #0a0909;
+  padding: 5px;
+  border-radius: 50%;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+
+
 </style>
 
 
-<div style="padding-left: 30px;">
-  <button class="a" routerLink="">Add Event</button>
-</div>
+
+
+
+
+
+

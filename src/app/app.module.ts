@@ -19,6 +19,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { ParticipationComponent } from './participation/participation.component';
 import { TypeeventComponent } from './dashborad/typeevent/typeevent.component';
 import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event.component';
+import { TestImageComponent } from './test-image/test-image.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event
     ParticipationComponent,
     TypeeventComponent,
     AddTypeEventComponent,
+    TestImageComponent,
 
   ],
   imports: [
@@ -42,7 +44,7 @@ import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   providers: [EventService],

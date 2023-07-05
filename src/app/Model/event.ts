@@ -10,10 +10,11 @@ export class Event {
   dateModif!: Date;
   nbrParticipants!: number;
   idUsers!: string[];
-  refImage!: string;
+
   imageId!: string[];
   name!: string;
   typeName!: string;
   type!: string; // Add the 'type' property
+  showTooltip!: boolean;
 
 }
