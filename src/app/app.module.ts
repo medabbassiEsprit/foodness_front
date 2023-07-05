@@ -14,7 +14,9 @@ import { NewplatComponent } from './newplat/newplat.component';
 //import { MenuPlatComponent } from './newmenu/newmenu.component';
 import { RouterModule } from '@angular/router';
 import { PlatviewComponent } from './platview/platview.component';
+import { ClientviewComponent } from './clientview/clientview.component';
 import { NewMenuComponent } from './newmenu/newmenu.component';
+import { MenuviewComponent } from './menuview/menuview.component';
 
 
 @NgModule({
@@ -28,8 +30,10 @@ import { NewMenuComponent } from './newmenu/newmenu.component';
     AdminComponentComponent,
     NewplatComponent,
     PlatviewComponent,
-    NewMenuComponent
-  
+    NewMenuComponent,
+    ClientviewComponent,
+    MenuviewComponent
+      
   ],
   imports: [
     BrowserModule,

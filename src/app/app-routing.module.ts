@@ -9,6 +9,8 @@ import { AdminComponentComponent } from './dashborad/admin/admin-component/admin
 import { NewplatComponent } from './newplat/newplat.component';
 import { PlatviewComponent } from './platview/platview.component';
 import { NewMenuComponent } from './newmenu/newmenu.component';
+import { MenuviewComponent } from './menuview/menuview.component';
+import { ClientviewComponent } from './clientview/clientview.component';
 
 
 const routes: Routes = [
@@ -20,9 +22,11 @@ const routes: Routes = [
   {path:'plat',component:NewplatComponent},
   {path:"listplat",component:PlatviewComponent},
   {path:"addMenu",component:NewMenuComponent},
+  {path:"listMenu",component:MenuviewComponent},
+  {path:'menuclient',component:ClientviewComponent},
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'listMenu', pathMatch: 'full' },
+  { path: '**', redirectTo: 'listMenu' }
 
 
 

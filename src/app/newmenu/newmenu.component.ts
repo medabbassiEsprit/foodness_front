@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Plat } from '../Model/plat';
-import { MenuPlatService } from '../services/menu.service';
 import MenuPlat from '../Model/menu';
 import { MenuplatService } from '../services/menuplat.service';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-newmenu',
@@ -14,7 +14,7 @@ export class NewMenuComponent implements OnInit {
   listMenu: Plat[]=[];// Array to store the existing plats
   selectedPlat: Plat | undefined;
 
-  constructor(private consumer: MenuplatService, private consumerPl:MenuPlatService) { }
+  constructor(private consumer: MenuplatService, private consumerPl:MenuService) { }
   addSelectedPlat() {
     if (this.selectedPlat) {
       this.newMenu.Plats.push(this.selectedPlat);

@@ -6,7 +6,7 @@ import MenuPlat from '../Model/menu';
 @Injectable({
   providedIn: 'root'
 })
-export class MenuPlatService {
+export class MenuService {
   private apiUrl = 'http://localhost:3000/menuplat'; // Remplacez 'API_URL' par l'URL de votre API
 
   constructor(private http: HttpClient) { }

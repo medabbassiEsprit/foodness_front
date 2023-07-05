@@ -1,0 +1,35 @@
+<app-header-component></app-header-component>
+
+<!-- Affichage des menus -->
+<div class="grid-container mt-4">
+  <div class="grid-item" *ngFor="let menu of listMenu">
+    <div class="card bg-primary text-white">
+      <div class="card-header">
+        <h3>{{ menu.NomduMenu }}</h3>
+      </div>
+      <div class="card-body">                     
+        <p class="card-text">Description: {{ menu.Description }}</p>
+        <p class="card-text">Prix: {{ menu.Prix }}</p>
+        <p class="card-text">Plats:</p>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let plat of menu.Plats">{{ plat }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Affichage des plats en scroll horizontal -->
+<div class="scroll-container">
+  <div class="scroll-item" *ngFor="let plat of listplat">
+    <div class="card bg-secondary text-white">
+      <div class="card-header">
+        <h3>{{ plat.nomduPlat }}</h3>
+      </div>
+      <div class="card-body">                     
+        <p class="card-text">Composition: {{ plat.composition }}</p>
+        <p class="card-text">Détails: {{ plat.details }}</p>
+      </div>
+    </div>
+  </div>
+</div>
