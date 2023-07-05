@@ -16,6 +16,7 @@ import { ReclamationPopupComponent } from './reclamation-popup/reclamation-popup
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserSpaceComponent } from './user-space/user-space.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddReclamationComponent } from './add-reclamation/add-reclamation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     AdminComponentComponent,
     ViewReclamationComponent,
     UserSpaceComponent,
-    ReclamationPopupComponent
+    ReclamationPopupComponent,
+    AddReclamationComponent
   ],
   imports: [
     BrowserModule,

@@ -15,8 +15,8 @@ export class ReplyServiceService {
     return this.http.post<Reply>(this.apiUrl, reply);
   }
 
-  getReplies(userId: string, recId: string): Observable<Reply[]> {
+  getReplies(userId: string, recId: string): Observable<Reply> {
     const url = `${this.apiUrl}${userId}/${recId}`;
-    return this.http.get<Reply[]>(url);
+    return this.http.get<Reply>(url);
   }
 }

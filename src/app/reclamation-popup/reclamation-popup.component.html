@@ -1,13 +1,21 @@
-<h2>{{ reclamation.recTitle }}</h2>
-<p>Label: {{ reclamation.recLabel }}</p>
-<p>Status: {{ reclamation.recStatus }}</p>
-<p>Created At: {{ reclamation.created_at | date: 'medium' }}</p>
+<div class="card text-white bg-primary">
+  <div class="card-body">
+    <h2 class="card-title">{{ reclamation.recTitle }}</h2>
+    <p class="card-text">Label: <span class="badge bg-danger">{{ reclamation.recLabel }}</span></p>
+    <p class="card-text">Status: <span class="badge bg-success">{{ reclamation.recStatus }}</span></p>
+    <p class="card-text">Created At: <span class="badge bg-warning text-dark">{{ reclamation.created_at | date: 'medium' }}</span></p>
+  </div>
+</div>
 
-<h3>Replies:</h3>
-<ul>
-  <li *ngFor="let reply of replyList">
-    <p>Content: {{ reply.resContent }}</p>
-    <p>Created At: {{ reply.created_at | date: 'medium' }}</p>
-    <hr>
-  </li>
-</ul>
+<div class="card mt-3">
+  <div class="card-body">
+    <h3 class="card-title">Replies:</h3>
+
+    <div class="reply" *ngIf="reply">
+      <p class="card-text">Message: {{ reply?.resContent }}</p>
+      <p class="card-text">Posted at: <span class="badge bg-secondary">{{ reply?.created_at | date: 'medium' }}</span></p>
+    </div>
+
+    <p class="card-text no-reply" *ngIf="!reply">No replies available.</p>
+  </div>
+</div>

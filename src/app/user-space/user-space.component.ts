@@ -37,12 +37,27 @@ export class UserSpaceComponent implements OnInit {
     console.log(reclamation);
     const dialogRef = this.dialog.open(ReclamationPopupComponent, {
       width: '600px',
-      height:'75%',
+      height: '75%',
       data: reclamation
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       // Handle any actions after the pop-up dialog is closed
     });
+  }
+
+  deleteReclamation(reclamation: Reclamation): void {
+    this.reclamationConsumer.deleteReclamation(reclamation._id).subscribe(
+      (response) => {
+        console.log('Reclamation deleted successfully');
+        // Remove the deleted reclamation from the reclamationList
+        this.reclamationList = this.reclamationList.filter(
+          (item) => item._id !== reclamation._id
+        );
+      },
+      (error) => {
+        console.error('Error deleting reclamation', error);
+      }
+    );
   }
 }

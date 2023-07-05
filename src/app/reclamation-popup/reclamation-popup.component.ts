@@ -11,22 +11,34 @@ import Reply from '../model/reply';
   styles: []
 })
 export class ReclamationPopupComponent {
-replyList:Reply[]=[];
+  reply: Reply | undefined;  // Update the type to a single Reply object
 
-  constructor(@Inject(MAT_DIALOG_DATA) public reclamation: Reclamation,private replyService:ReplyServiceService ) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public reclamation: Reclamation,
+    private replyService: ReplyServiceService
+  ) {}
 
-ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
-  this.replyService.getReplies(this.reclamation.userId, this.reclamation._id).subscribe({
-    next:(data)=>(this.replyList= data),
-    error:(err)=>{
-      console.error(err);
-    },
-    complete() {
-        console.info('completed')
-    },
-  });
+  ngOnInit(): void {
+    this.replyService
+      .getReplies(this.reclamation.userId, this.reclamation._id)
+      .subscribe({
+        next: (data) => {
+          this.reply = data;  // Retrieve the first reply from the array
+          console.log(data);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete() {
+          console.info('completed');
+        },
+      });
+  }
 
-}
+  deleteReclamation(): void {
+    // Add your deletion logic here
+    // For example, you can make a DELETE request to the server or perform any necessary actions
+    // Once the deletion is complete, you can close the dialog if desired
+
+  }
 }

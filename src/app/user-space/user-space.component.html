@@ -1,10 +1,14 @@
 <app-header-component></app-header-component>
 
 <style>
-  h1{
+  h1 {
     padding-top: 50px;
+    color: #333;
+    text-align: center;
   }
+
   .card {
+    position: relative;
     height: 25%;
     padding: 20px;
     margin-bottom: 20px;
@@ -13,35 +17,82 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   .card-header {
     font-weight: bold;
     margin-bottom: 10px;
+    color: #337ab7;
   }
 
   .card-content {
     margin-bottom: 10px;
+    color: #333;
   }
 
   .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 12px;
     color: #888;
-
   }
-  span{
-    padding: 10px;
+
+  .badge-label {
+    background-color: #fcaE61;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    color: #fff;
+  }
+
+  .badge-status {
+    background-color: #5cb85c;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    color: #fff;
+  }
+
+  .badge-date {
+    background-color: #f0ad4e;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    color: #fff;
+  }
+
+  .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background-color: transparent;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .delete-button:hover {
+    color: #f44336;
   }
 </style>
 
-<h1>Mes Reclamations </h1>
+<h1>Mes Réclamations</h1>
 
-<div class="card" *ngFor="let item of reclamationList"  (click)="openPopup(item)">
+<div class="card" *ngFor="let item of reclamationList" (click)="openPopup(item)">
+  <button class="delete-button" (click)="deleteReclamation(item)"><i class="fa fa-trash"></i></button>
   <div class="card-header">{{ item.recTitle }}</div>
   <div class="card-content">{{ item.recContent }}</div>
   <div class="card-footer">
-    <span>Label: {{ item.recLabel }}</span>
-    <span>Status: {{ item.recStatus }}</span>
-    <span>Created At: {{ item.created_at | date: 'medium' }}</span>
+    <span class="badge-label">Label: {{ item.recLabel }}</span>
+    <span class="badge-status">Status: {{ item.recStatus }}</span>
+    <span class="badge-date">Created At: {{ item.created_at | date: 'medium' }}</span>
   </div>
 </div>
