@@ -16,7 +16,7 @@ import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event
 
 const routes: Routes = [
   {path:'products',component:ViewReclamationComponent},
-  {path:'event',component:EventComponent},
+  {path:'home/event',component:EventComponent},
   {path:'admin/events/addEvent',component:AddEventComponent},
   {path:'home',component:HomeComponentComponent},
   {path:'admin',component:AdminComponentComponent},
