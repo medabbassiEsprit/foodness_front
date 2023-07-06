@@ -11,8 +11,8 @@ export class ReclamationService {
 
   constructor(private http: HttpClient) { }
 
-  createReclamation(reclamation: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, reclamation);
+  createReclamation(reclamation: Reclamation) {
+    return this.http.post<Reclamation>(this.apiUrl, reclamation);
   }
 
   getAllReclamations() {

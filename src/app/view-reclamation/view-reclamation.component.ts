@@ -29,7 +29,7 @@ export class ViewReclamationComponent implements OnInit {
   }
 
   updateStatus(item: Reclamation): void {
-    this.reclamationConsumer.updateReclamationStatus(item._id, item.recStatus).subscribe({
+    this.reclamationConsumer.updateReclamationStatus(item._id, item.recStatus.type).subscribe({
       next: () => {
         console.log('Status updated successfully.');
         this.reclamationConsumer.getAllReclamations().subscribe({
@@ -47,6 +47,7 @@ export class ViewReclamationComponent implements OnInit {
       }
     });
   }
+
 
   updateLabel(item: Reclamation): void {
     this.reclamationConsumer.updateReclamationLabel(item._id, item.recLabel).subscribe({

@@ -851,11 +851,12 @@
             </select>
           </td>
           <td>
-            <select class="form-select" [(ngModel)]="item.recStatus" (change)="updateStatus(item)">
-              <option value="Pending" [selected]="item.recStatus === 'Pending'">Pending</option>
-              <option value="Closed" [selected]="item.recStatus === 'Closed'">Closed</option>
-              <option value="InReview" [selected]="item.recStatus === 'InReview'">In Review</option>
+            <select class="form-select" [(ngModel)]="item.recStatus.type" (change)="updateStatus(item)">
+              <option value="Pending" [selected]="item.recStatus.type === 'Pending'">Pending</option>
+              <option value="Closed" [selected]="item.recStatus.type === 'Closed'">Closed</option>
+              <option value="InReview" [selected]="item.recStatus.type === 'InReview'">In Review</option>
             </select>
+
           </td>
           <td>{{ item.recEvent }}</td>
           <td>{{ item.rectFormation }}</td>
