@@ -819,55 +819,54 @@
                 border-radius: 3px;
               }
             </style>
-        <div class="plat">
-          <form (ngSubmit)="onSubmit()">
-            <fieldset>
-              <legend>Informations du Menu</legend>
-        
-              <div class="form-group">
-                <label for="NomduMenu">Nom du Menu:</label>
-                <input type="text" id="NomduMenu" name="NomduMenu" [(ngModel)]="newMenu.NomduMenu">
-              </div>
-        
-              <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" id="description" name="description" [(ngModel)]="newMenu.Description">
-              </div>
-        
-              <div class="form-group">
-                <label for="prix">Prix:</label>
-                <input type="text" id="prix" name="prix" [(ngModel)]="newMenu.Prix">
-              </div>
-        
-              <div class="form-group">
-                <label for="selectedPlat">Plat:</label>
-                <select id="selectedPlat" name="selectedPlat" [(ngModel)]="selectedPlat">
-                  <option value="" disabled>Select a plat</option>
-                  <option *ngFor="let plat of listMenu" [ngValue]="plat">{{ plat.nomduPlat }}</option>
-                </select>
-              </div>
-        
-              <!-- Button to add the selected plat to the menu -->
-              <button type="button" (click)="addSelectedPlat()">Add Plat to Menu</button>
-        
-              <!-- Display the selected plats -->
-              <div *ngIf="newMenu.Plats.length > 0">
-                <h3>Selected Plats:</h3>
-                <ul>
-                  <li *ngFor="let plat of newMenu.Plats">{{ plat.nomduPlat }}</li>
-                </ul>
-              </div>
-            </fieldset>
-        
-            <button type="submit" class="btn btn-primary">Submit</button>
-            
-          </form>
-          
-        </div>
-        
+    <div class="plat">
+      <form (submit)="onSubmit()" enctype="multipart/form-data">
+          <fieldset>
+          <legend>Informations du Menu</legend>
+    
+          <div class="form-group">
+            <label for="NomduMenu">Nom du Menu:</label>
+            <input type="text" id="NomduMenu" name="NomduMenu" [(ngModel)]="newMenu.NomduMenu">
           </div>
-          
-        </div>
+    
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" [(ngModel)]="newMenu.Description">
+          </div>
+    
+          <div class="form-group">
+            <label for="prix">Prix:</label>
+            <input type="text" id="prix" name="prix" [(ngModel)]="newMenu.Prix">
+          </div>
+    
+          <div class="form-group">
+            <label for="selectedPlat">Plat:</label>
+            <select id="selectedPlat" name="selectedPlat" [(ngModel)]="selectedPlat">
+              <option value="" disabled>Select a plat</option>
+              <option *ngFor="let plat of listMenu" [ngValue]="plat">{{ plat.nomduPlat }}</option>
+            </select>
+          </div>
+    
+          <!-- Button to add the selected plat to the menu -->
+          <button type="button" (click)="addSelectedPlat()">Add Plat to Menu</button>
+    
+          <!-- Display the selected plats -->
+          <div *ngIf="newMenu.Plats.length > 0">
+            <h3>Selected Plats:</h3>
+            <ul>
+              <li *ngFor="let plat of newMenu.Plats">{{ plat.nomduPlat }}</li>
+            </ul>
+          </div>
+    
+          <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" (change)="onImageChange($event)">          </div>
+        </fieldset>
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    
         <!--**********************************
             Content body end
         ***********************************-->

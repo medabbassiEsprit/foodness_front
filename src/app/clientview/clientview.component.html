@@ -7,7 +7,8 @@
       <div class="card-header">
         <h3>{{ menu.NomduMenu }}</h3>
       </div>
-      <div class="card-body">                     
+      <div class="card-body">
+        <img [src]="menu.imageUrl" alt="Menu Image" class="menu-image"> <!-- Add this line -->
         <p class="card-text">Description: {{ menu.Description }}</p>
         <p class="card-text">Prix: {{ menu.Prix }}</p>
         <p class="card-text">Plats:</p>
@@ -16,8 +17,10 @@
         </ul>
       </div>
     </div>
+    
+    </div>
   </div>
-</div>
+
 
 <!-- Affichage des plats en scroll horizontal -->
 <div class="scroll-container">
