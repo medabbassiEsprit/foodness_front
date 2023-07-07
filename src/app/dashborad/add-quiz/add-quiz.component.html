@@ -1,9 +1,9 @@
 <div class="add-quiz-form">
-    <h2>Add Quiz</h2>
-    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+    <h2><strong>Add Quiz</strong></h2>
+    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
       <div class="form-group">
-        <label for="refFormation">Formation</label>
-        <select formControlName="refFormation" id="refFormation">
+        <label for="refFormation" class="title">Formation</label>
+        <select formControlName="refFormation" id="refFormation" class="form-control">
           <option value="" disabled>Select a formation</option>
           <option *ngFor="let formation of formations" [value]="formation?._id">{{ formation?.libelle }}</option>
         </select>
@@ -13,8 +13,8 @@
       </div>
   
       <div class="form-group">
-        <label for="titre">Quiz Title</label>
-        <input type="text" formControlName="titre" id="titre">
+        <label for="titre" class="title">Quiz Title</label>
+        <input type="text" formControlName="titre" id="titre" class="form-control elevation">
         <div *ngIf="quizForm.get('titre').errors && quizForm.get('titre').touched" class="error">
           Quiz title is required
         </div>
@@ -22,18 +22,20 @@
   
       <!-- Add response field -->
       <div class="form-group">
-        <label for="response">Response</label>
-        <input type="text" formControlName="response" id="response">
-        <button type="button" (click)="addResponse()">Add Response</button>
+        <label for="response" class="title">Response</label>
+        <div class="input-group">
+          <input type="text" formControlName="response" id="response" class="form-control elevation">
+          <button type="button" (click)="addResponse()" class="btn btn-primary">Add Response</button>
+        </div>
       </div>
       <div formArrayName="responses">
-        <div *ngFor="let response of responses.controls; let i=index" [formGroupName]="i">
-          <input type="text" formControlName="value">
+        <div *ngFor="let response of responses.controls; let i=index" [formGroupName]="i" class="response-group">
+          <input type="text" formControlName="value" class="form-control elevation">
         </div>
       </div>
       <!-- End of response field -->
   
-      <button type="submit">Add Quiz</button>
+      <button type="submit" class="btn btn-success">Add Quiz</button>
     </form>
   </div>
   
