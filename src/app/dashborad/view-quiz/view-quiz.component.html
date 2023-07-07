@@ -1,0 +1,19 @@
+<div class="view-quiz">
+    <h2>View Quizzes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Quiz Title</th>
+          <th>Formation</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quiz of quizzes">
+          <td>{{ quiz.titre }}</td>
+          <td>{{ quiz.score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

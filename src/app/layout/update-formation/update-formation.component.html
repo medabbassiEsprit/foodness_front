@@ -1,0 +1,29 @@
+<form [formGroup]="formationForm" (ngSubmit)="updateFormation()">
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="libelle" class="form-label">Libelle:</label>
+          <input type="text" id="libelle"   class="form-control" formControlName="libelle">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="dateDebut" class="form-label">Date Debut:</label>
+          <input type="date" id="dateDebut"  class="form-control" formControlName="dateDebut">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="dateFin" class="form-label">Date Fin:</label>
+          <input type="date" id="dateFin" class="form-control" formControlName="dateFin">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="refType" class="form-label">Type Formation :</label>
+          <select id="refType" formControlName="refType"  class="form-control">
+            <option value="" disabled selected>Select a type</option>
+            <option *ngFor="let typeFormation of listeTypeFormation " [value]="typeFormation._id">{{ typeFormation.libelle }}</option>
+
+
+            </select>
+          </div>
+    </div>
+   
+    
+    <button type="submit" class="btn btn-primary" [disabled]="!formationForm.valid">Create</button>
+</form>
