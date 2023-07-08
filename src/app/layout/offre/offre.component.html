@@ -1,0 +1,72 @@
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+  </div>
+  <div id="main-wrapper">
+      <!-- row -->
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="row my-3">
+                <button class="btn btn-primary ms-3 col-2" (click)="ajouterOffre()">Ajouter Un offre</button> 
+
+            </div>
+        </div>
+    </div>
+  <div class="row">
+  
+          <div class="table" >
+            <table id="example5" class="mb-4 dataTablesCard col-10 mx-auto">
+              <thead>
+                                      <tr>
+  
+                                          <th><strong class="font-w600">Nom </strong></th>
+                                          <th><strong class="font-w600">Description </strong></th>
+                                        <th><strong class="font-w600">Nombre des plats disponibles </strong></th>
+                                        <th>Liste des plats : </th>
+                                        <th>Actions </th>
+                                      </tr>
+                                  </thead>
+              <tbody>
+                <tr *ngFor="let offre of ListOffres">
+                    <td>
+                        {{ offre.name }}
+                    </td>
+                    <td>
+                        {{offre.description}}
+                    </td>
+                     <td>
+                        {{ offre.list_plat.length}}
+                     </td>
+                     <td>
+                        <ul *ngFor="let plat of offre.list_plat " class="list-group my-2">
+                            <li class="list-group-item">
+                               name : {{ plat.name }} 
+                            </li>
+                            <li  class="list-group-item">
+                                description : {{ plat.description }}
+                            </li>
+                            <li  class="list-group-item">
+                                quantite : {{ plat.quantity}}
+                            </li>
+                        </ul>
+                     </td>
+                     <td>
+                        <button class="btn btn-danger" (click)="delete(offre._id)">Delete</button>
+                     </td>
+                </tr>
+              
+               
+            </tbody>
+            </table>
+            
+          </div>
+         
+  </div>
+  <div class="row" *ngIf="openAdd">
+<app-add-offre (offreAdded)="offreAdded()"></app-add-offre>
+      </div>
+  </div>
+  

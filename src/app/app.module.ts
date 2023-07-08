@@ -8,7 +8,7 @@ import { HomeComponentComponent } from './layout/home/home-component/home-compon
 import { LoginComponentComponent } from './layout/login/login-component/login-component.component';
 import { RegisterComponentComponent } from './layout/register/register-component/register-component.component';
 import { AdminComponentComponent } from './dashborad/admin/admin-component/admin-component.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgetPasswordComponent } from './layout/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './layout/reset-password/reset-password.component';
@@ -20,6 +20,8 @@ import { DatePipe } from '@angular/common';
 import { DateFormatPipe } from './date-format.pipe';
 import { DashboardComponent } from './layout/Don/dashboard/dashboard.component';
 import { ParticiperComponent } from './layout/Don/participer/participer.component';
+import { OffreComponent } from './layout/offre/offre.component';
+import { AddOffreComponent } from './layout/add-offre/add-offre.component';
 
 @NgModule({
   declarations: [
@@ -38,19 +40,18 @@ import { ParticiperComponent } from './layout/Don/participer/participer.componen
     UpdateDashComponent,
     DateFormatPipe,
     DashboardComponent,
-    ParticiperComponent
-    
+    ParticiperComponent,
+    OffreComponent,
+    AddOffreComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-    ],
-  providers: [
-    DatePipe
+    ReactiveFormsModule,
   ],
-  bootstrap: [AppComponent]
+  providers: [DatePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

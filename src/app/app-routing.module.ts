@@ -13,30 +13,28 @@ import { UpdateProfileComponent } from './layout/update-profile/update-profile.c
 import { UpdateDashComponent } from './dashborad/update-dash/update-dash.component';
 import { AuthGuard } from './dashborad/auth.guard';
 import { DashboardComponent } from './layout/Don/dashboard/dashboard.component';
-
+import { OffreComponent } from './layout/offre/offre.component';
 
 const routes: Routes = [
-  {path:'header',component:HeaderComponentComponent},
-  { path: 'home', component: HomeComponentComponent},
-  {path:'login' , component:LoginComponentComponent},
-  {path:'forgPass' , component:ForgetPasswordComponent},
-  {path:'resetpassword' , component:ResetPasswordComponent},
-  {path:'user' , component:UserDashComponent},
-  {path:'editProfile' , component:UpdateProfileComponent},
-  {path:'update/:id' , component:UpdateDashComponent},
-  {path:'role' , component:RoleDashComponent},
-  {path:"don", component:DashboardComponent},
-  {path:'register',component:RegisterComponentComponent},
-  {path:'admin',component:AdminComponentComponent},
+  { path: 'header', component: HeaderComponentComponent },
+  { path: 'home', component: HomeComponentComponent },
+  { path: 'login', component: LoginComponentComponent },
+  { path: 'forgPass', component: ForgetPasswordComponent },
+  { path: 'resetpassword', component: ResetPasswordComponent },
+  { path: 'user', component: UserDashComponent },
+  { path: 'editProfile', component: UpdateProfileComponent },
+  { path: 'update/:id', component: UpdateDashComponent },
+  { path: 'role', component: RoleDashComponent },
+  { path: 'don', component: DashboardComponent },
+  { path: 'register', component: RegisterComponentComponent },
+  { path: 'offre', component: OffreComponent },
+  { path: 'admin', component: AdminComponentComponent },
   // {path:'admin',component:AdminComponentComponent,canActivate: [AuthGuard],data: {role: 'ROLE_ADMIN'} },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' }
-
-
-
+  { path: '**', redirectTo: 'home' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

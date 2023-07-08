@@ -44,17 +44,40 @@
         
          
 
-        <form [formGroup]="ParticiperForm" (ngSubmit)="onSubmit()">
-          
-          <label  *ngIf="don?.RefTypeOfDon?.name=='plats'" for="first-name">Quantite</label>
-          <label  *ngIf="don?.RefTypeOfDon?.name=='money'" for="first-name">Amount</label>
-
-          <input id="first-name" type="number" class="form-control" formControlName="quantite">
-        
-          <button type="submit" class="mt-2 col-3 btn btn-primary">Submit</button>
-
-        </form>
-         </div>
+       <form [formGroup]="ParticiperForm" (ngSubmit)="onSubmit()">
+        <label *ngIf="don?.RefTypeOfDon?.name === 'plats'" for="plats-select">Plats:</label>
+      
+        <select *ngIf="don?.RefTypeOfDon?.name === 'plats'" class="form-control" id="plats-select"
+          formControlName="platSelect">
+          <option *ngFor="let plat of ListePlats" [value]="plat._id">
+            nom: {{ plat.nomduPlat }} 
+          </option>
+        </select>
+      
+        <label *ngIf="don?.RefTypeOfDon?.name === 'plats'" for="quantite-input">Quantite:</label>
+      
+        <label *ngIf="don?.RefTypeOfDon?.name === 'money'" for="quantite-input">Amount:</label>
+      
+      
+      
+        <input id="quantite-input" type="number" class="form-control" min="1"
+          max="don.Target - don.ProgessValue" formControlName="quantite">
+      
+        <div *ngIf="ParticiperForm.touched">
+          <div *ngIf="ParticiperForm.get('quantite')?.errors?.['min']">
+            Quantity must be at least 1.
+          </div>
+          <div *ngIf="isMaxError">
+            Quantity exceeds the maximum value.
+          </div>
+          <div *ngIf="ParticiperForm.get('quantite')?.errors?.['required']">
+            Quantity is required.
+          </div>
+        </div>
+      
+        <button type="submit" class="mt-2 col-3 btn btn-primary" [disabled]="ParticiperForm.invalid">Submit</button>
+      </form>
+             </div>
         </div>
   </div>
 
