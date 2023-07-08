@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../services/event.service';
-import { Event } from '../Model/event';
+import { EventService } from '../../services/event.service';
+import { Event } from '../../Model/event';
 import { Router } from '@angular/router';
-import { ImageServService } from '../services/image-serv.service';
-import { EventType } from '../Model/eventType';
-import { TypeEventService } from '../services/type-event.service';
+import { ImageServService } from '../../services/image-serv.service';
+import { EventType } from '../../Model/eventType';
+import { TypeEventService } from '../../services/type-event.service';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-event',
@@ -94,12 +95,32 @@ export class AddEventComponent implements OnInit {
     this.eventService.addEvent(this.event, this.imageUrls).subscribe(
       () => {
         console.log('Event created successfully');
-        this.router.navigate(['admin/events']); // Navigate to events page
+        this.router.navigate(['admin/events']);
+        this.sendWelcomeEmailToUsers().subscribe(
+          () => {
+            console.log('Welcome emails sent successfully');
+            this.router.navigate(['admin/events']); // Navigate to events page
+          },
+          error => {
+            console.error('Failed to send welcome emails:', error);
+            // Handle error
+          }
+        );
       },
       error => {
         console.error('Failed to create event:', error);
         // Handle error
       }
     );
+  }
+
+  sendWelcomeEmailToUsers(): Observable<any> {
+    const emails: string[] = []; // Array of user emails, replace with your user emails
+
+    const emailPromises: Observable<any>[] = emails.map(email => {
+      return this.eventService.sendWelcomeEmail(email);
+    });
+
+    return forkJoin(emailPromises);
   }
 }

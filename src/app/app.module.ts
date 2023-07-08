@@ -15,11 +15,11 @@ import { EventService } from './services/event.service';
 import { EventComponent } from './layout/event/event.component';
 import { EventAdminComponent } from './dashborad/event-admin/event-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddEventComponent } from './add-event/add-event.component';
-import { ParticipationComponent } from './participation/participation.component';
 import { TypeeventComponent } from './dashborad/typeevent/typeevent.component';
 import { AddTypeEventComponent } from './dashborad/add-type-event/add-type-event.component';
 import { TestImageComponent } from './test-image/test-image.component';
+import { ParticipationComponent } from './layout/participation/participation.component';
+import { AddEventComponent } from './dashborad/add-event/add-event.component';
 
 @NgModule({
   declarations: [

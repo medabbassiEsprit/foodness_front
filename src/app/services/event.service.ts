@@ -18,11 +18,11 @@ export class EventService {
     return this.http.get<Event[]>(this.apiUrl);
   }
 
-  addUserToEvent(eventId: string, user: any): Observable<any> {
+/*   addUserToEvent(eventId: string, user: any): Observable<any> {
     const url = `${this.apiUrl}${eventId}/addUser`;
     return this.http.post<any>(url, user);
   }
-
+ */
   addEvent(event: any, images: string[]): Observable<any> {
     const url = this.apiUrl;
     const formData = new FormData();
@@ -66,5 +66,45 @@ export class EventService {
     const url = `${this.apiUrl}${eventId}`;
     return this.http.delete<any>(url);
   }
-  
+  sendEmail(recipient: string, subject: string, content: string): Observable<any> {
+    const url = 'http://127.0.0.1:3000/send-email';
+    const emailData = {
+      recipient: recipient,
+      subject: subject,
+      content: content
+    };
+
+    return this.http.post(url, emailData);
+  }
+
+  sendWelcomeEmail(email: string): Observable<any> {
+    const subject = 'Welcome to Foodness!';
+    const content =
+      'Welcome! We are delighted to announce an exciting new event that you can actively participate in. For more detailed information about this event and everything it entails, we invite you to visit our website.';
+
+    return this.sendEmail(email, subject, content);
+  }
+  addUserAndDecrementParticipants(eventId: string, userId: string, nbrParticipants: number): Observable<any> {
+    const url = `${this.apiUrl}${eventId}/addUser`;
+    const requestBody = { idUsers: [userId], nbrParticipants }; // Wrap userId in an array
+
+    return this.http.patch<any>(url, requestBody);
+  }
+  filterEvents(emplacementEvent?: string, organisateur?: string): Observable<Event[]> {
+    const url = `${this.apiUrl}filters`;
+
+    let options: { params?: { [param: string]: string | string[] } } = {};
+
+    if (emplacementEvent) {
+      options.params = { emplacementEvent };
+    }
+    if (organisateur) {
+      options.params = { ...options.params, organisateur };
+    }
+
+    return this.http.get<Event[]>(url, options);
+  }
 }
+
+
+

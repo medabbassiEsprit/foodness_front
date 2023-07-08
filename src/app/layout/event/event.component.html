@@ -1,8 +1,33 @@
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <img src="..." class="rounded me-2" alt="...">
+    <strong class="me-auto">Foodness Team</strong>
+
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    Hello, Welcome to our Events
+  </div>
+</div>
+<div class="search-bar" style="padding-top: 50px;">
+  <input type="text" placeholder="Search events" (input)="searchEvents($event)">
+  <ul class="search-results" *ngIf="searchResults.length > 0">
+    <li *ngFor="let result of searchResults" [routerLink]="['/events', result._id, 'participation']">
+      {{ result.Titre }} - {{ result.emplacementEvent }}
+    </li>
+  </ul>
+</div>
 <div class="event-grid" style="padding-top: 90px; padding-left: 30px; padding-right: 30px;">
   <div class="card" *ngFor="let event of events; let i = index">
-    <img [src]="event.imageId" alt="Event Image">
+    <div class="image-container">
+      <ng-container *ngFor="let imageUrl of event.imageId[0].split(',')">
+        <img [src]="imageUrl" alt="Event Image">
+      </ng-container>
+    </div>
     <div class="card-body">
       <h2 class="card-title">{{ event.Titre }}</h2>
+      <h6>Type Event :{{ event.typeName }}</h6>
+
 
       <div class="tooltip-wrapper">
         <button type="button" class="btn"
@@ -15,123 +40,213 @@
 
       <p><strong>Organizer:</strong> {{ event.organisateur }}</p>
       <p><strong>Location:</strong> {{ event.emplacementEvent }}</p>
-      <p><strong>Start Date:</strong> {{ event.dateDeb }}</p>
-      <p><strong>End Date:</strong> {{ event.dateFin }}</p>
-      <p><strong>Creation Date:</strong> {{ event.dateCreation }}</p>
-      <p><strong>Modification Date:</strong> {{ event.dateModif }}</p>
-      <p><strong>No. of Participants:</strong> {{ event.nbrParticipants }}</p>
-      <!-- Add more event details or elements here (click)="addUserToEvent(event._id, { id: '1' })" -->
+      <p><strong>Start Date:</strong> {{ event.dateDeb| date}}</p>
+      <p><strong>End Date:</strong> {{ event.dateFin|date }}</p>
+      <p>
+        <strong>Remaining Seats:</strong>
+        <span class="participant-count" [ngClass]="{ 'flicker': event.isFlickering }">
+          {{ event.nbrParticipants }}
+        </span>
+        <span class="reserve-message" *ngIf="event.isFlickering">
+          Reserve your place before it ends!
+        </span>
+      </p>
+
+            <!-- Add more event details or elements here (click)="addUserToEvent(event._id, { id: '1' })" -->
       <div class="button-container">
-        <button class="participate-button">Participate</button>
+        <a style="padding-right: 20px;" ><button class="c"  (click)="addUserToEvent(event._id, event.nbrParticipants)">Participate</button>
+        <button class="participate-button" (click)="getEvent(event._id)" [routerLink]="['/events', event._id, 'participation']">More Detls</button>
+      </a>
       </div>
     </div>
   </div>
 </div>
 
 <div style="padding-left: 30px;">
-  <button class="a" routerLink="">Add Event</button>
-</div>
-<div style="padding-left: 30px;">
-  <button class="a" routerLink="/testimage">test</button>
-</div>
+
+
+<a style="padding-left: 30px;"><button class="a" routerLink="/testimage">test</button></a>
+
 
 
 <style>
+  .search-bar {
+    margin-bottom: 20px;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .search-results {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+
+  .search-results li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .search-results li:hover {
+    background-color: #e0e0e0;
+  }
+
+  .c {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
   .event-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     grid-gap: 20px;
   }
-.card {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: #d0dac3;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.card img {
-  width: 100%;
-  height: auto;
-}
-.card-body {
-  padding: 10px;
-}
-.card-title {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-.card-description {
-  font-size: 14px;
-  color: #888888;
-}
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-.view-button {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-.participate-button {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-.a {
-background-color: #007bff;
-color: #fff;
-border-radius: 5px;
-padding: 8px 16px;
-border: none;
-cursor: pointer;
-font-size: 14px;
+  .card {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
 
-}
-.btn {
-background-color: #007bff;
-color: #fff;
-border-radius: 5px;
-}
-.tooltip-wrapper {
-  position: relative;
-  display: inline-block;
-}
+  .image-container {
+    height: 200px;
+    overflow: auto;
+  }
 
-.tooltip {
-  position: absolute;
-  background-color: #ffffff;
-  color: #0a0909;
-  padding: 5px;
-  border-radius: 50%;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
+  .image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
 
-.tooltip.show {
-  opacity: 1;
-}
+  .image-container img:hover {
+    transform: scale(1.05);
+  }
+
+  .card img:hover {
+    transform: scale(1.05);
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .card-title {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .card-description {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .view-button,
+  .participate-button,
+  .a {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .participate-button:hover,
+  .a:hover {
+    background-color: #0056b3;
+  }
+
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: #ffffff;
+    color: #0a0909;
+    padding: 5px;
+    border-radius: 50%;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .tooltip.show {
+    opacity: 1;
+  }
+
+  .participant-count {
+    background-color: #1e88e5;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    animation: flicker 1s infinite;
+
+  }
+
+  .participant-count:hover {
+    background-color: #0d47a1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .participant-count:active {
+    background-color: #1565c0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .reserve-message {
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+  }
+
+
+  @keyframes flicker {
+    0% {
+      background-color: #1e88e5;
+    }
+    50% {
+      background-color: #ff0000;
+    }
+  }
 
 
 
-</style>
-
-
-
-
-
-
-
+  </style>
 

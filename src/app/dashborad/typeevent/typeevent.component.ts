@@ -62,19 +62,26 @@ export class TypeeventComponent implements OnInit {
   modifyAndUpdate(eventType: EventType): void {
     const newTypeName = prompt('Enter the new name for the event type:', eventType.typeName);
     if (newTypeName !== null && newTypeName !== '') {
-      eventType.typeName = newTypeName;
-      this.typeEventService.updateEventTypeById(eventType._id, { typeName: newTypeName }).subscribe(
-        (response: any) => {
-          console.log('EventType updated successfully:', response);
-          // Refresh the page to reflect the updated event type
-          window.location.reload();
-        },
-        (error: any) => {
-          console.error('Failed to update event type:', error);
-        }
-      );
+      // Check if the newTypeName already exists
+      const typeNameExists = this.eventTypes.some(e => e.typeName.toLowerCase() === newTypeName.toLowerCase());
+      if (typeNameExists) {
+        alert('The entered event type name already exists.');
+      } else {
+        eventType.typeName = newTypeName;
+        this.typeEventService.updateEventTypeById(eventType._id, { typeName: newTypeName }).subscribe(
+          (response: any) => {
+            console.log('EventType updated successfully:', response);
+            // Refresh the page to reflect the updated event type
+            window.location.reload();
+          },
+          (error: any) => {
+            console.error('Failed to update event type:', error);
+          }
+        );
+      }
     }
   }
+
 }
 
 

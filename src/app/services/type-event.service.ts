@@ -28,7 +28,7 @@ export class TypeEventService {
   }
 
   getEventTypeById(eventTypeId: string): Observable<any> {
-    const url = `${this.apiUrlTypeEvent}/${eventTypeId}`;
+    const url = `${this.apiUrlTypeEvent}${eventTypeId}`;
     return this.http.get(url).pipe(
       catchError((error: any) => {
         throw error;
@@ -37,8 +37,8 @@ export class TypeEventService {
   }
 
   updateEventTypeById(eventTypeId: string, updates: any): Observable<any> {
-    const url = `${this.apiUrlTypeEvent}/${eventTypeId}`;
-    return this.http.put(url, updates).pipe(
+    const url = `${this.apiUrlTypeEvent}${eventTypeId}`;
+    return this.http.patch(url, updates).pipe(
       catchError((error: any) => {
         throw error;
       })

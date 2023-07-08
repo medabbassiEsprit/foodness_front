@@ -16,5 +16,10 @@ export class Event {
   typeName!: string;
   type!: string; // Add the 'type' property
   showTooltip!: boolean;
+  isEdit?: boolean; // Add isEdit property
+  updatedTitre?: string; // Add updatedTitre property
+  updatedDescription?: string
+  totalSeats!:number ;
+  isFlickering: boolean = true;
 
 }

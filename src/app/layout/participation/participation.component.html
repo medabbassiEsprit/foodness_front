@@ -1,0 +1,146 @@
+<style>
+  .event-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .event-container h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .event-container p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .event-container strong {
+    font-weight: bold;
+    color: #000;
+  }
+
+  .event-not-found {
+    text-align: center;
+    font-size: 24px;
+    color: #888;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+    margin-top: 30px;
+  }
+
+  .image-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .image-grid img:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-blue {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .btn-blue:hover {
+    background-color: #0056b3;
+  }
+
+  @keyframes borderAnimation {
+    0% {
+      border-width: 0;
+    }
+    100% {
+      border-width: 10px;
+    }
+  }
+
+  .animated-border {
+    display: ruby-base-container;
+    padding: 10px;
+    animation: borderAnimation 2s infinite alternate-reverse;
+    border: 10px solid transparent;
+    border-image: linear-gradient(45deg, #06b9d1, #0fafdc) 1;
+    border-image-slice: 1;
+  }
+  .event-container h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+
+  .event-container p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: center;
+  }
+</style>
+
+
+
+<h2 style="padding-top: 100px; padding-left: 150px;">
+  <span class="animated-border" >Welcome..!!</span>
+</h2>
+<div class="event-container">
+  <ng-container *ngIf="event">
+  <h1><strong>Event name is:</strong> {{ event.Titre }}</h1><br>
+  <h1><strong>Event Type :</strong> {{event.typeName}}</h1>
+
+<h1><strong>Event Details</strong> </h1>
+
+
+  <p><strong>Organisateur:</strong> {{ event.organisateur }}</p>
+  <p><strong>Emplacement:</strong> {{ event.emplacementEvent }}</p>
+  <p><strong>description:</strong> {{ event.description }}</p>
+
+  <p><strong>Date de début:</strong> {{ event.dateDeb | date }}</p>
+  <p><strong>Date de fin:</strong> {{ event.dateFin | date }}</p>
+  <p><strong>Date de création:</strong> {{ event.dateCreation | date }}</p>
+  <p><strong>Date de modification:</strong> {{ event.dateModif | date }}</p>
+  <p><strong>Nombre de participants:</strong> {{ event.nbrParticipants }}</p>
+  <div class="image-grid">
+    <a *ngFor="let imageUrl of event.imageId[0].split(','); let i = index" [href]="imageUrl" target="_blank">
+      <img [src]="imageUrl" [alt]="'Event Image ' + (i + 1)">
+    </a>
+  </div>
+
+  <div style="display: flex; justify-content: center; margin-top: 20px;">
+    <a style="padding-right: 20px;" ><button class="btn btn-blue"  (click)="addUserToEvent(event._id, event.nbrParticipants)">Participate</button></a>
+    <
+
+    <a><button class="btn btn-blue" (click)="return()">Return</button></a>
+
+  </div>
+</ng-container>
+<p class="event-not-found" *ngIf="!event">Event not found.</p>
+</div>
+
