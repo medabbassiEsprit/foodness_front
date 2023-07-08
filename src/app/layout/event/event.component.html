@@ -9,14 +9,17 @@
     Hello, Welcome to our Events
   </div>
 </div>
-<div class="search-bar" style="padding-top: 50px;">
-  <input type="text" placeholder="Search events" (input)="searchEvents($event)">
-  <ul class="search-results" *ngIf="searchResults.length > 0">
-    <li *ngFor="let result of searchResults" [routerLink]="['/events', result._id, 'participation']">
-      {{ result.Titre }} - {{ result.emplacementEvent }}
-    </li>
-  </ul>
-</div>
+<form class="form-inline">
+  <div class="search-bar" style="padding-top: 50px;">
+    <input type="text" placeholder="Search events" (input)="searchEvents($event)">
+    <ul class="search-results" *ngIf="searchResults.length > 0">
+      <li *ngFor="let result of searchResults" [routerLink]="['/events', result._id, 'participation']">
+        {{ result.Titre }} - {{ result.emplacementEvent }}
+      </li>
+    </ul>
+  </div>
+</form>
+
 <div class="event-grid" style="padding-top: 90px; padding-left: 30px; padding-right: 30px;">
   <div class="card" *ngFor="let event of events; let i = index">
     <div class="image-container">
@@ -100,6 +103,8 @@
   .search-results li:hover {
     background-color: #e0e0e0;
   }
+
+
 
   .c {
     background-color: #007bff;
